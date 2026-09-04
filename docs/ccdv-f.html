@@ -1,0 +1,2359 @@
+<title>CCDV-F 直前対策ガイド</title>
+<style>
+  :root {
+    --paper: #FAFAF8;
+    --card: #FFFFFF;
+    --ink: #23272E;
+    --ink-soft: #4B5563;
+    --ink-faint: #6B7280;
+    --line: #E2E4E8;
+    --accent: #2D4FA0;
+    --accent-soft: #E8EDF8;
+    --accent-ink: #24407F;
+    --amber: #9A6700;
+    --amber-bg: #FBF3E0;
+    --green: #1A7F4B;
+    --green-bg: #E6F4EC;
+    --red: #B3372F;
+    --red-bg: #FBEAE8;
+    --code-bg: #EFF1F5;
+    --bar-bg: #E6E9F0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #16191F;
+      --card: #1D2129;
+      --ink: #E5E7EB;
+      --ink-soft: #B0B6C0;
+      --ink-faint: #8B919C;
+      --line: #333844;
+      --accent: #7C9BE8;
+      --accent-soft: #253352;
+      --accent-ink: #A9BFF2;
+      --amber: #E0B341;
+      --amber-bg: #33290F;
+      --green: #57C489;
+      --green-bg: #16301F;
+      --red: #E58B84;
+      --red-bg: #3A1E1B;
+      --code-bg: #2A2F3A;
+      --bar-bg: #2A2F3A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #16191F;
+    --card: #1D2129;
+    --ink: #E5E7EB;
+    --ink-soft: #B0B6C0;
+    --ink-faint: #8B919C;
+    --line: #333844;
+    --accent: #7C9BE8;
+    --accent-soft: #253352;
+    --accent-ink: #A9BFF2;
+    --amber: #E0B341;
+    --amber-bg: #33290F;
+    --green: #57C489;
+    --green-bg: #16301F;
+    --red: #E58B84;
+    --red-bg: #3A1E1B;
+    --code-bg: #2A2F3A;
+    --bar-bg: #2A2F3A;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
+    font-size: 15.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 0 20px 96px; }
+
+  /* ---- tab nav ---- */
+  .tabs {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+  .tabs .inner {
+    max-width: 860px; margin: 0 auto; padding: 0 20px;
+    display: flex; gap: 4px;
+    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .tabs .inner::-webkit-scrollbar { display: none; }
+  .tabs a {
+    display: block; padding: 12px 16px 10px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    white-space: nowrap; flex: 0 0 auto;
+    color: var(--ink-soft); border-bottom: 3px solid transparent;
+  }
+  .tabs a.active { color: var(--accent-ink); border-bottom-color: var(--accent); }
+  .tabs a:hover { color: var(--accent-ink); }
+  .tabs a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+  header.top {
+    border-bottom: 3px solid var(--accent);
+    padding: 40px 0 28px;
+    margin-bottom: 8px;
+  }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(26px, 4.5vw, 36px); line-height: 1.35; margin: 0 0 10px;
+    font-weight: 800; letter-spacing: .01em; text-wrap: balance;
+  }
+  .lede { color: var(--ink-soft); margin: 0; max-width: 42em; }
+
+  h2 {
+    font-size: 21px; font-weight: 800; margin: 64px 0 16px;
+    padding-top: 20px; border-top: 1px solid var(--line);
+    letter-spacing: .01em; text-wrap: balance;
+  }
+  h2 .weight {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    background: var(--accent-soft); border-radius: 4px; padding: 2px 8px;
+    margin-left: 10px; vertical-align: 2px; white-space: nowrap;
+  }
+  h3 { font-size: 16.5px; font-weight: 700; margin: 28px 0 8px; }
+  p { margin: 10px 0; }
+  ul, ol { margin: 8px 0 14px; padding-left: 1.5em; }
+  li { margin: 5px 0; }
+  li > ul { margin-top: 4px; }
+
+  code {
+    font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: .88em; background: var(--code-bg); border-radius: 4px;
+    padding: 1px 5px; word-break: break-all;
+  }
+  strong { font-weight: 700; }
+  em { font-style: normal; font-weight: 700; color: var(--accent-ink); }
+
+  .facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; margin: 24px 0 8px;
+  }
+  .fact {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .fact .k { font-size: 11.5px; color: var(--ink-faint); letter-spacing: .06em; }
+  .fact .v { font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .fact .v small { font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+
+  .domain-bars { margin: 18px 0 6px; display: flex; flex-direction: column; gap: 7px; }
+  .dbar { display: grid; grid-template-columns: 15em 1fr 3.6em; gap: 10px; align-items: center; font-size: 13.5px; }
+  .dbar .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dbar .tr { background: var(--bar-bg); border-radius: 3px; height: 12px; overflow: hidden; }
+  .dbar .fl { display: block; background: var(--accent); height: 100%; border-radius: 3px; }
+  .dbar .pc { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-soft); font-weight: 700; }
+  @media (max-width: 560px) { .dbar { grid-template-columns: 9.5em 1fr 3.4em; } }
+
+  .callout {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--amber); background: var(--amber-bg); }
+  .callout.good { border-left-color: var(--green); background: var(--green-bg); }
+  .callout p:first-child { margin-top: 0; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .tag { font-size: 11.5px; font-weight: 800; letter-spacing: .08em; display: block; margin-bottom: 2px; }
+  .callout .tag { color: var(--accent-ink); }
+  .callout.warn .tag { color: var(--amber); }
+  .callout.good .tag { color: var(--green); }
+
+  .tablewrap { overflow-x: auto; margin: 14px 0 20px; border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--card); }
+  th, td { border-bottom: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; line-height: 1.65; }
+  th {
+    background: var(--code-bg); font-size: 12.5px; letter-spacing: .04em;
+    color: var(--ink-soft); white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { white-space: nowrap; font-weight: 700; }
+  @media (max-width: 640px) { td:first-child { white-space: normal; } }
+
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding-left: 1.7em; position: relative; margin: 8px 0; }
+  .checklist li::before {
+    content: "☐"; position: absolute; left: 0; color: var(--accent); font-weight: 700;
+  }
+
+  nav.toc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 18px; margin: 24px 0; font-size: 14px;
+  }
+  nav.toc ol { margin: 6px 0 0; columns: 2; column-gap: 28px; padding-left: 1.4em; }
+  @media (max-width: 560px) { nav.toc ol { columns: 1; } }
+  nav.toc a { color: var(--accent-ink); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  nav.toc .toctitle { font-weight: 800; font-size: 13px; letter-spacing: .08em; color: var(--ink-faint); }
+
+  .foot { margin-top: 72px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-faint); }
+
+  /* ---- practice view ---- */
+  .qtoolbar {
+    position: sticky; top: var(--tabs-h, 45px); z-index: 10;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; margin: 20px 0;
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+  }
+  .qtoolbar .score { font-weight: 800; font-variant-numeric: tabular-nums; font-size: 14px; }
+  .qtoolbar .score .ok { color: var(--green); }
+  .qtoolbar .spacer { flex: 1; }
+  .btn {
+    font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    border: 1px solid var(--line); border-radius: 6px;
+    background: var(--card); color: var(--ink);
+    padding: 6px 14px;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent-ink); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .btn.primary, .btn.primary { color: #fff; }
+  .btn.primary:hover { opacity: .9; }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 20px; }
+  .chip {
+    font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--card); color: var(--ink-soft); padding: 4px 12px;
+  }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .qcard {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 20px 16px; margin: 16px 0;
+  }
+  .qcard .qhead { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+  .qcard .qno { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .qcard .dom {
+    font-size: 11px; font-weight: 700; color: var(--ink-faint);
+    border: 1px solid var(--line); border-radius: 3px; padding: 1px 6px; white-space: nowrap;
+  }
+  .qcard .multi-note {
+    font-size: 11px; font-weight: 800; color: var(--amber);
+    background: var(--amber-bg); border-radius: 3px; padding: 1px 6px; white-space: nowrap;
+  }
+  .qcard .status { margin-left: auto; font-size: 12px; font-weight: 800; }
+  .qcard .status.ok { color: var(--green); }
+  .qcard .status.ng { color: var(--red); }
+  .qcard .stem { margin: 4px 0 12px; }
+  .opts { display: flex; flex-direction: column; gap: 8px; padding: 0; margin: 0; list-style: none; }
+  .opts button {
+    font: inherit; text-align: left; cursor: pointer; width: 100%;
+    display: flex; gap: 10px; align-items: flex-start;
+    background: var(--paper); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 8px; padding: 9px 13px;
+    line-height: 1.7;
+  }
+  .opts button:hover:not([disabled]) { border-color: var(--accent); background: var(--accent-soft); }
+  .opts button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .opts button[disabled] { cursor: default; }
+  .opts .letter { font-weight: 800; color: var(--accent); flex: 0 0 auto; }
+  .opts button.selected { border-color: var(--accent); background: var(--accent-soft); }
+  .opts button.correct { border-color: var(--green); background: var(--green-bg); }
+  .opts button.correct .letter { color: var(--green); }
+  .opts button.wrong { border-color: var(--red); background: var(--red-bg); }
+  .opts button.wrong .letter { color: var(--red); }
+  .qcard .submitrow { margin-top: 10px; }
+  .expl {
+    margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 12px;
+  }
+  .expl .a { font-weight: 800; color: var(--green); }
+  .expl .a.ng { color: var(--red); }
+  .vlabel {
+    margin: 12px 0 2px; font-size: 11.5px; font-weight: 800; letter-spacing: .08em;
+    color: var(--accent-ink);
+  }
+  ul.vocab { margin: 2px 0 0; font-size: 13.5px; }
+  ul.vocab li { margin: 3px 0; }
+
+  .result {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px 20px; margin: 24px 0;
+  }
+  .result h3 { margin-top: 0; }
+  .rbar { display: grid; grid-template-columns: 11em 1fr 6.5em; gap: 10px; align-items: center; font-size: 13.5px; margin: 5px 0; }
+  .rbar .tr { background: var(--bar-bg); border-radius: 3px; height: 12px; overflow: hidden; }
+  .rbar .fl { display: block; background: var(--green); height: 100%; border-radius: 3px; }
+  .rbar .fl.low { background: var(--red); }
+  .rbar .fl.mid { background: var(--amber); }
+  .rbar .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-soft); font-weight: 700; white-space: nowrap; }
+  @media (max-width: 560px) { .rbar { grid-template-columns: 6.5em 1fr 6.5em; } }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .expl { animation: fadein .18s ease-out; }
+    @keyframes fadein { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: none; } }
+  }
+
+  /* ---- narrow screens ---- */
+  @media (max-width: 640px) {
+    body { font-size: 15px; line-height: 1.8; }
+    main { padding: 0 14px 72px; }
+
+    .tabs .inner { padding: 0 10px; gap: 0; }
+    .tabs a { font-size: 12.5px; padding: 10px 9px 8px; }
+
+    header.top { padding: 28px 0 20px; }
+    h2 { margin-top: 44px; }
+    h2 .weight { display: inline-block; margin-left: 0; margin-top: 4px; }
+
+    /* 高さのあるツールバーを固定すると画面の大半を塞ぐため、モバイルでは固定しない */
+    .qtoolbar {
+      position: static; padding: 10px 12px; gap: 8px 6px; margin: 16px 0 12px;
+    }
+    .qtoolbar .score { width: 100%; }
+    .qtoolbar .spacer { display: none; }
+    .qtoolbar .btn { flex: 1 1 auto; padding: 7px 8px; font-size: 12.5px; }
+
+    .chips { gap: 5px; }
+    .chip { font-size: 12px; padding: 4px 10px; }
+
+    .rbar { grid-template-columns: 3.4em 1fr 6.4em; gap: 8px; }
+    .dbar { grid-template-columns: 8.6em 1fr 3.4em; gap: 8px; font-size: 12.5px; }
+
+    .qcard { padding: 14px 14px 12px; }
+    .qcard .qhead { gap: 6px; }
+    .qcard .status { margin-left: 0; }
+    .opts button { padding: 8px 11px; gap: 8px; }
+    .opts { gap: 7px; }
+
+    .facts { gap: 8px; }
+    .fact { padding: 10px 12px; }
+    ul, ol { padding-left: 1.25em; }
+    nav.toc { padding: 12px 14px; }
+    .callout { padding: 10px 13px; }
+    details { padding: 10px 14px !important; }
+  }
+
+  @media (max-width: 380px) {
+    .tabs .inner { padding: 0 6px; }
+    .tabs a { font-size: 11.5px; padding: 10px 6px 7px; }
+    main { padding: 0 12px 72px; }
+    .qcard { padding: 12px 12px 10px; }
+    .rbar { grid-template-columns: 3em 1fr 6em; }
+  }
+</style>
+
+<nav class="tabs" aria-label="ページ切り替え">
+  <div class="inner">
+    <a href="#guide" id="tab-guide" class="active">📖 対策ガイド</a>
+    <a href="#practice" id="tab-practice">✍️ 模擬問題演習</a>
+    <a href="#scenario" id="tab-scenario">🧪 シナリオ100問</a>
+  </div>
+</nav>
+
+<!-- ============================ GUIDE VIEW ============================ -->
+<main id="view-guide">
+<header class="top">
+  <p class="eyebrow">Claude Certified Developer – Foundations</p>
+  <h1>CCDV-F 直前対策ガイド</h1>
+  <p class="lede">公式 Exam Guide(CCDV-F v1.0 / CCAR-F v1.0)を出題比重順に再構成した一夜漬け用資料。要点 → 判断早見表 → 模擬問題演習 → 当日チェックリストの順に進めてください。模擬問題は上部タブの「模擬問題演習」ページで、採点付きの実戦形式で解けます。</p>
+</header>
+
+<section class="facts">
+  <div class="fact"><div class="k">問題数</div><div class="v">53問 <small>択一+複数選択</small></div></div>
+  <div class="fact"><div class="k">試験時間</div><div class="v">120分</div></div>
+  <div class="fact"><div class="k">合格ライン</div><div class="v">720 <small>/ 100–1,000</small></div></div>
+  <div class="fact"><div class="k">受験料</div><div class="v">$125</div></div>
+  <div class="fact"><div class="k">有効期間</div><div class="v">12ヶ月</div></div>
+  <div class="fact"><div class="k">配信</div><div class="v"><small>Pearson VUE(オンライン監督 or テストセンター)</small></div></div>
+</section>
+
+<p>複数選択問題は「いくつ選ぶか」が問題文に明記されます。絶対評価(criterion-referenced)なので、他の受験者との相対順位は関係ありません。ドメイン別正答率はスコアレポートに表示されますが、合否は総合スケールスコアのみで決まります。</p>
+
+<nav class="toc">
+  <span class="toctitle">目次</span>
+  <ol>
+    <li><a href="#strategy">出題比重と戦略</a></li>
+    <li><a href="#d2">Domain 2: Applications and Integration</a></li>
+    <li><a href="#d5">Domain 5: Model Selection and Optimization</a></li>
+    <li><a href="#d1">Domain 1: Agents and Workflows</a></li>
+    <li><a href="#d6">Domain 6: Prompt and Context Engineering</a></li>
+    <li><a href="#d8">Domain 8: Tools and MCPs</a></li>
+    <li><a href="#d7">Domain 7: Security and Safety</a></li>
+    <li><a href="#d3">Domain 3: Claude Code</a></li>
+    <li><a href="#d4">Domain 4: Eval, Testing, and Debugging</a></li>
+    <li><a href="#tables">頻出・判断早見表</a></li>
+    <li><a href="#practice">模擬問題演習(別ページ)</a></li>
+    <li><a href="#scenario">シナリオ100問(別ページ)</a></li>
+    <li><a href="#checklist">直前チェックリスト</a></li>
+  </ol>
+</nav>
+
+<h2 id="strategy">出題比重と戦略</h2>
+<div class="domain-bars">
+  <div class="dbar"><span class="nm">D2 Applications and Integration</span><span class="tr"><span class="fl" style="width:100%"></span></span><span class="pc">33.1%</span></div>
+  <div class="dbar"><span class="nm">D5 Model Selection &amp; Optimization</span><span class="tr"><span class="fl" style="width:51%"></span></span><span class="pc">16.8%</span></div>
+  <div class="dbar"><span class="nm">D1 Agents and Workflows</span><span class="tr"><span class="fl" style="width:44%"></span></span><span class="pc">14.7%</span></div>
+  <div class="dbar"><span class="nm">D6 Prompt &amp; Context Engineering</span><span class="tr"><span class="fl" style="width:33%"></span></span><span class="pc">11.0%</span></div>
+  <div class="dbar"><span class="nm">D8 Tools and MCPs</span><span class="tr"><span class="fl" style="width:32%"></span></span><span class="pc">10.6%</span></div>
+  <div class="dbar"><span class="nm">D7 Security and Safety</span><span class="tr"><span class="fl" style="width:24%"></span></span><span class="pc">8.1%</span></div>
+  <div class="dbar"><span class="nm">D3 Claude Code</span><span class="tr"><span class="fl" style="width:9%"></span></span><span class="pc">3.1%</span></div>
+  <div class="dbar"><span class="nm">D4 Eval, Testing, Debugging</span><span class="tr"><span class="fl" style="width:8%"></span></span><span class="pc">2.6%</span></div>
+</div>
+<p><strong>D2 + D5 で全体の約50%</strong>。API メカニクス(Batch・キャッシュ・streaming・stop_reason)とモデル選択・コスト最適化を最優先で固めてください。次点は D1(エージェントループ)と D8(ツール設計・MCP)。</p>
+<div class="callout">
+  <span class="tag">出題の性格</span>
+  <p>サンプル問題を見る限り、暗記より「<strong>シナリオに対して最も適切な設計判断を選ぶ</strong>」形式が中心です。各選択肢は「動くが不適切」なものが混ざるので、<strong>コスト・レイテンシ・決定論性・保守性</strong>のどの軸が問われているかを見極めるのがコツです。</p>
+</div>
+
+<h2 id="d2">Domain 2: Applications and Integration <span class="weight">33.1%</span></h2>
+
+<h3>Messages API の基本</h3>
+<ul>
+  <li>単一エンドポイント <code>POST /v1/messages</code> にすべてが乗る。必須パラメータは <code>model</code> / <code>max_tokens</code> / <code>messages</code>。</li>
+  <li><strong>API はステートレス</strong>。マルチターンでは会話履歴全体を毎回送信する。最初のメッセージは <code>user</code> ロール。</li>
+  <li>レスポンスの <code>content</code> はブロックの配列(<code>text</code> / <code>tool_use</code> / <code>thinking</code> など)。<code>type</code> を確認してからアクセスする。</li>
+  <li><em>stop_reason</em> の値: <code>end_turn</code>(自然終了)/ <code>tool_use</code>(ツール実行要求)/ <code>max_tokens</code>(上限到達=切り捨ての可能性)/ <code>stop_sequence</code> / <code>pause_turn</code>(サーバーツールの中断、再送で再開)/ <code>refusal</code>(安全上の拒否)。</li>
+  <li>マルチフォーマット入力: 画像は base64 または URL の <code>image</code> ブロック、PDF は <code>document</code> ブロック。テキストブロックより前に置く。</li>
+</ul>
+
+<h3>Streaming</h3>
+<ul>
+  <li>SSE イベントの順序: <code>message_start</code> → <code>content_block_start</code> → <code>content_block_delta</code>(トークンごと)→ <code>content_block_stop</code> → <code>message_delta</code>(<code>stop_reason</code> と usage を含む)→ <code>message_stop</code>。</li>
+  <li>大きい <code>max_tokens</code>(目安 16K 超)は HTTP タイムアウト回避のためストリーミング必須。チャット UI のリアルタイム表示にも使う。</li>
+</ul>
+
+<h3>Message Batches API(頻出)</h3>
+<ul>
+  <li><em>50% 割引・最大 24時間処理・レイテンシ SLA なし</em>。夜間レポート、週次監査、大量ドキュメント一括処理など「待てる」ワークロード向け。</li>
+  <li>ブロッキングな用途(マージ前チェック、対話 UI)には<strong>不適</strong> — そこは同期 API を使う。</li>
+  <li><code>custom_id</code> でリクエストとレスポンスを対応付ける。<strong>結果は順不同</strong>で返るので位置ではなく custom_id でキーする。</li>
+  <li>ステータスを <code>ended</code> までポーリングしてから結果を取得。失敗分は custom_id で特定し、修正して再送(例: コンテキスト超過ならチャンク分割)。</li>
+  <li><strong>Batch 内では複数ターンのツール実行はできない</strong>(リクエスト途中でツールを実行して結果を返す往復が不可能)。</li>
+  <li>大量処理の前にサンプルでプロンプトを調整し、一発成功率を上げてから流すのが定石。</li>
+</ul>
+
+<h3>Prompt Caching(頻出)</h3>
+<ul>
+  <li><strong>プレフィックス一致</strong>。レンダリング順は <code>tools</code> → <code>system</code> → <code>messages</code>。前方の1バイトの変化で後方のキャッシュがすべて無効化される。</li>
+  <li>安定した内容(システムプロンプト、ツール定義、大きな文書)を先頭に、変動する内容(タイムスタンプ、ユーザー固有の質問)を末尾に置く。</li>
+  <li><code>cache_control: {"type": "ephemeral"}</code> をブロックに付与。TTL はデフォルト5分、オプションで1時間。</li>
+  <li>コスト: キャッシュ書き込み ≈ 1.25倍、読み取り ≈ 0.1倍(<strong>最大約90%削減</strong>)。</li>
+  <li>検証は usage の <code>cache_creation_input_tokens</code> / <code>cache_read_input_tokens</code>。読み取りが常に0なら、システムプロンプト内の <code>datetime.now()</code> のような「サイレント無効化要因」を疑う。</li>
+  <li>マルチターンでは最新ターンの末尾にブレークポイントを置き、会話が伸びるたびに差分だけ課金される(cache checkpointing)。</li>
+</ul>
+
+<h3>設計・構成管理</h3>
+<ul>
+  <li>Claude はインターフェースごとに指示の解釈経路が異なる(Claude Code / Desktop / claude.ai / API / SDK)。API では system プロンプトが唯一の「開発者の声」。</li>
+  <li>コンテンツ境界: 信頼できる指示と untrusted な入力(ユーザー入力・取得した文書)を XML タグ等で明確に分離する。</li>
+  <li><strong>モデルバージョンのピン留め</strong>: 本番ではエイリアスでなく特定バージョンを固定し、アップグレードは eval を通してから。リリース間で挙動が変わりうる(breaking behavior changes)。</li>
+  <li>プロンプトもコードと同様にバージョン管理(prompt versioning)。設定は <code>CLAUDE.md</code> / <code>settings.json</code> / プラグイン依存関係で管理。</li>
+  <li>SDLC への統合: コードレビュー、小規模〜大規模リファクタリング、非同期処理、REST/JSON の基礎はここで問われる。</li>
+</ul>
+
+<h2 id="d5">Domain 5: Model Selection and Optimization <span class="weight">16.8%</span></h2>
+
+<h3>LLM の基礎</h3>
+<ul>
+  <li>LLM は<strong>次トークン予測</strong>。出力は非決定的(temperature 0 でも完全一致は保証されない)。</li>
+  <li>トークン: 英語で約 3〜4 文字/トークン。入出力両方が課金対象。コンテキストウィンドウは入力+出力の合計上限。</li>
+  <li>プロンプト技法: zero-shot(例なし)/ single-shot(1例)/ multi-shot(複数例)。例が多いほど形式の一貫性が上がる。</li>
+</ul>
+
+<h3>モデル選択(頻出)</h3>
+<div class="tablewrap"><table>
+  <tr><th>モデル</th><th>特性</th><th>適する用途</th></tr>
+  <tr><td>Opus</td><td>最高性能・高コスト・低速</td><td>複雑な推論、長時間の自律エージェント、大規模リファクタ、難しいコーディング</td></tr>
+  <tr><td>Sonnet</td><td>性能と速度・コストのバランス</td><td>本番の主力。エージェント、コーディング、大量の実務処理</td></tr>
+  <tr><td>Haiku</td><td>最速・最安</td><td>分類、ルーティング、単純な抽出、レイテンシ最優先のタスク</td></tr>
+</table></div>
+<ul>
+  <li>「品質・レイテンシ・コスト」の3軸トレードオフで選ぶ。<strong>コスト削減のために闇雲に最小モデルへ落とすのは誤答の定番</strong>(品質要件を無視しているため)。</li>
+  <li>モデルオプション: <em>fast mode</em>(出力を高速化)、<em>extended thinking / adaptive thinking</em>(推論を深める。adaptive はモデルが思考量を自動調整)、<em>effort levels</em>(low/medium/high… — 思考の深さとトークン消費を制御)。</li>
+  <li>思考が必要な複雑タスク → thinking + effort 高め。単純タスク → thinking なし/effort 低で高速・低コスト。</li>
+</ul>
+
+<h3>コスト・トークン管理</h3>
+<ul>
+  <li>コスト最適化の主要レバー(順に検討): ① プロンプトキャッシュ ② Batch API(50%オフ)③ 適切なモデルティア ④ effort/max_tokens の調整 ⑤ コンテキストの削減(ツール出力の刈り込み)。</li>
+  <li><code>count_tokens</code> エンドポイントで事前見積もり。usage フィールドで実測を追跡。</li>
+  <li>キャッシュと Batch は併用可能(バッチ内の共有 system にキャッシュを効かせる)。</li>
+</ul>
+
+<h2 id="d1">Domain 1: Agents and Workflows <span class="weight">14.7%</span></h2>
+
+<h3>ワークフロー vs エージェント</h3>
+<ul>
+  <li><strong>ワークフロー</strong>: コードが制御フローを決める(事前定義の手順・分岐)。予測可能でデバッグしやすい。手順が既知ならこちら。</li>
+  <li><strong>エージェント</strong>: モデルが次の行動を判断する(ツール選択・ループ)。手順が事前に決められない曖昧なタスク向け。コスト・エラーリスクは高い。</li>
+  <li>判断基準: タスクの複雑さ/価値がコストに見合うか/モデルがその種のタスクを遂行できるか/エラーの検出・回復が可能か。1つでも No なら単純な構成に留める。</li>
+</ul>
+
+<h3>エージェントループ(最頻出パターン)</h3>
+<ul>
+  <li>ライフサイクル: リクエスト送信 → <code>stop_reason</code> を確認 → <code>tool_use</code> ならツール実行 → <code>tool_result</code> を <strong>user メッセージとして履歴に追加</strong> → 再送信 → <code>end_turn</code> で終了。</li>
+  <li>assistant 応答(tool_use ブロック含む)を履歴に追加してからツール結果を返す。<code>tool_result</code> の <code>tool_use_id</code> は対応する <code>tool_use</code> の id と一致させる。</li>
+  <li>並列ツール呼び出し: 1応答に複数の tool_use が来たら、<strong>全結果を1つの user メッセージで返す</strong>。</li>
+  <li><strong>アンチパターン</strong>: 自然言語の「完了しました」をパースして終了判定/一律の反復回数上限を主要な停止機構にする/assistant のテキスト有無で完了判定 — 正解は常に <code>stop_reason</code> ベースの制御。</li>
+</ul>
+
+<h3>マルチエージェント(coordinator–subagent)</h3>
+<ul>
+  <li>ハブ&スポーク: コーディネータがタスク分解・委譲・結果集約・エラー処理・通信のすべてを仲介する(可観測性と一貫したエラー処理のため)。</li>
+  <li><strong>サブエージェントはコンテキストを継承しない</strong>。必要な情報(前段の調査結果、制約、出力形式)はプロンプトに明示的に渡す。</li>
+  <li>並列実行: コーディネータが<strong>1つの応答で複数の Task ツール呼び出しを同時に発行</strong>する(ターンをまたがない)。Claude Code では <code>allowedTools</code> に "Task" が必要。</li>
+  <li>コーディネータのタスク分解が狭すぎるとカバレッジ漏れが起きる(例: 「クリエイティブ産業」を視覚芸術だけに分解 → 音楽・文学が欠落)。原因切り分けではまず<strong>分解のログ</strong>を見る。</li>
+  <li>コーディネータへのプロンプトは手順の逐次指定ではなく「目標と品質基準」を与え、適応の余地を残す。</li>
+  <li><code>fork_session</code>: 共有の分析ベースラインから分岐して複数アプローチを並行検証。<code>--resume &lt;名前&gt;</code> で過去セッションを再開(コード変更後はその旨を伝える。古いツール結果が多いなら要約を注入して新規セッションの方が確実)。</li>
+</ul>
+
+<h3>Hooks(決定論的制御)</h3>
+<ul>
+  <li>プロンプトによる指示は<strong>確率的</strong>で失敗率がゼロにならない。業務ルールの保証(本人確認前の返金ブロック、閾値超の取引拒否)には <strong>hook によるプログラム的強制</strong>を使う。</li>
+  <li><code>PostToolUse</code>: ツール結果をモデルが読む前に変換(タイムスタンプ形式の正規化など)。ツール呼び出しの送信側をインターセプトしてポリシー違反をブロックし、代替フロー(人間へのエスカレーション)へ誘導するパターンも問われる。</li>
+</ul>
+
+<h3>構築手段とフレームワーク</h3>
+<ul>
+  <li>選択肢: Claude Agent SDK(組み込みツール+エージェントループ一式)/ 自作ループ(最大の柔軟性)/ マネージド(Anthropic ホスト。自前ホストとの対比)。</li>
+  <li>エージェント抽象化フレームワークの例: <strong>LangGraph、Strands、PydanticAI</strong>。マルチステップのワークフロー構築を抽象化する。</li>
+  <li>共通パターン: tool-use ループ、サブエージェント、メモリ(ファイルベースの永続化)、コンテキストウィンドウ管理。</li>
+</ul>
+
+<h2 id="d6">Domain 6: Prompt and Context Engineering <span class="weight">11.0%</span></h2>
+
+<h3>プロンプトエンジニアリング</h3>
+<ul>
+  <li>役割分担: <strong>system</strong> = 役割・不変のルール・出力形式。<strong>user</strong> = 個別のタスク・データ。</li>
+  <li>曖昧な指示より<strong>明示的な基準</strong>。「保守的に」「高確信のみ報告」のような定性指示は精度を改善しない — 「報告する種類(バグ・セキュリティ)とスキップする種類(スタイル)」をカテゴリで定義する。</li>
+  <li><strong>few-shot は形式の一貫性と曖昧ケース処理の最有力手段</strong>。曖昧なシナリオを狙って2〜4例、選択理由も添えると新規パターンへ汎化する。抽出タスクのハルシネーション低減にも効く。</li>
+  <li>入出力の具体例(2〜3個)は、散文の説明が安定しないときの最良の伝達手段。</li>
+  <li>入力サニタイズ、反復的改善(テスト駆動、失敗例の共有)、インタビューパターン(実装前に Claude に質問させて考慮漏れを出す)。</li>
+</ul>
+
+<h3>コンテキストエンジニアリング</h3>
+<ul>
+  <li><strong>lost in the middle</strong>: 長い入力の先頭と末尾は確実に処理されるが中間は欠落しやすい。重要な要約は先頭へ、詳細は明示的なセクション見出しで整理。</li>
+  <li>ツール出力は<strong>コンテキストに蓄積する前に関連フィールドだけに刈り込む</strong>(40フィールドの注文データから必要な5個だけ残す等)。</li>
+  <li>逐次要約(compaction)のリスク: 数値・日付・金額・顧客の明言した期待値が曖昧化する → 取引ファクト(注文番号・金額・ステータス)は要約の外の「case facts ブロック」として毎プロンプトに保持する。</li>
+  <li>コンテキスト分離: 冗長な探索はサブエージェントに隔離し、要約だけをメインに返す。長セッションでは scratchpad ファイルに知見を書き出して参照(コンテキスト劣化対策)。<code>/compact</code> で圧縮。</li>
+  <li>context drift / bloat の防止 = ツール出力の刈り込み+compaction+サブエージェント分離、と覚える。</li>
+</ul>
+
+<h3>出力ハンドリング</h3>
+<ul>
+  <li>構造化出力の最も確実な方法 = <strong>tool_use + JSON スキーマ</strong>(構文エラーを排除)。ただし<strong>意味エラーは防げない</strong>(合計が合わない、値のフィールド違い)→ 検証は別途必要。</li>
+  <li><code>tool_choice</code>: <code>auto</code>(テキストで返す可能性あり)/ <code>any</code>(必ずいずれかのツールを呼ぶ=構造化出力の保証)/ <code>{"type":"tool","name":...}</code>(特定ツールを強制)。</li>
+  <li>スキーマ設計: 元文書にない可能性がある項目は <strong>optional / nullable</strong> にして捏造を防ぐ。enum には <code>"unclear"</code> や <code>"other"</code>+詳細文字列で拡張性を持たせる。</li>
+  <li>防御的パース: 自信満々の出力も疑う。検証 → 失敗したら<strong>元文書+失敗した抽出+具体的な検証エラー</strong>を添えてリトライ(retry-with-error-feedback)。</li>
+  <li>リトライが効くのは形式・構造エラー。<strong>情報が元文書に存在しない場合は何度リトライしても無駄</strong>。</li>
+  <li>自己検証フロー: <code>stated_total</code> と <code>calculated_total</code> を両方抽出して突合、<code>conflict_detected</code> ブール等。</li>
+</ul>
+
+<h2 id="d8">Domain 8: Tools and MCPs <span class="weight">10.6%</span></h2>
+
+<h3>ツール実装</h3>
+<ul>
+  <li><strong>ツール説明(description)がツール選択の主要メカニズム</strong>。曖昧・重複した説明は誤ルーティングの根本原因。入力形式・例・エッジケース・「類似ツールとの使い分け境界」を書く。まず説明を改善するのが「最初の一手」(few-shot 追加やルーティング層より先)。</li>
+  <li>名前は具体的に(<code>get_weather</code> ではなく用途が伝わる名前)。汎用ツールは目的別に分割(<code>analyze_document</code> → <code>extract_data_points</code> / <code>summarize_content</code>)。</li>
+  <li><strong>ツール数が多すぎると選択精度が落ちる</strong>(18個より役割に必要な4〜5個)。サブエージェントには役割に必要なツールだけをスコープする。</li>
+  <li>エラーハンドリング: <code>tool_result</code> に <code>is_error: true</code>。構造化エラー(<code>errorCategory</code>: transient/validation/business/permission、<code>isRetryable</code>、人間可読な説明)で回復判断を可能にする。一律の「Operation failed」は NG。</li>
+  <li><strong>アクセス失敗(タイムアウト等)と「0件の正常結果」を区別</strong>して返す。</li>
+  <li>client-side(自アプリで実行、承認ゲート可)vs server-side(Anthropic 実行: web search, code execution 等)の区別。破壊的操作は承認パターンで守る。</li>
+</ul>
+
+<h3>MCP サーバー開発</h3>
+<ul>
+  <li>MCP = ツール・リソース・プロンプトを標準プロトコルで公開するサーバー。<strong>複数アプリで再利用・独立保守したい機能は MCP 化</strong>が正解(システムプロンプトへのハードコードやデータ貼り付けは誤答)。</li>
+  <li>通信: <code>stdio</code>(ローカル・同一マシン)/ HTTP・ソケット(リモート)。クライアント(Claude 側)とサーバー(機能提供側)の役割を区別。</li>
+  <li><strong>MCP リソース</strong> = コンテンツカタログ(issue 一覧、DB スキーマ、ドキュメント階層)を公開して探索的ツール呼び出しを削減する仕組み。アクションは「ツール」、参照データは「リソース」。</li>
+  <li>スコープ: プロジェクトの <code>.mcp.json</code>(チーム共有・バージョン管理)vs ユーザーの <code>~/.claude.json</code>(個人・実験用)。認証情報は <code>${GITHUB_TOKEN}</code> のような<strong>環境変数展開</strong>でコミットせずに渡す。</li>
+  <li>接続時にすべての設定済みサーバーのツールが発見され、同時に利用可能になる。標準的な統合(Jira 等)は既存のコミュニティ MCP サーバーを優先し、自作はチーム固有ワークフローに限る。</li>
+</ul>
+
+<h3>ビルトイン vs カスタムツール vs Skills vs MCP</h3>
+<div class="tablewrap"><table>
+  <tr><th>手段</th><th>選ぶとき</th></tr>
+  <tr><td>ビルトインツール</td><td>ファイル・シェル・検索など汎用操作(Read/Write/Edit/Bash/Grep/Glob)。任意の内部 API に自動で届くわけではない</td></tr>
+  <tr><td>カスタムツール</td><td>単一アプリ内で外部システムを呼ぶ。関数スキーマを自分で定義</td></tr>
+  <tr><td>MCP サーバー</td><td>複数の Claude アプリで再利用・独立保守したい統合</td></tr>
+  <tr><td>Skills</td><td>手順書・ドメイン知識・ワークフローをオンデマンドで読み込ませたい(コード実行より「知識・手順」)</td></tr>
+</table></div>
+
+<h2 id="d7">Domain 7: Security and Safety <span class="weight">8.1%</span></h2>
+<ul>
+  <li><strong>プロンプトインジェクション対策(最頻出)</strong>: ① untrusted 入力(Web ページ、ユーザー文書)を信頼済み指示から分離 ② 最小権限 — 注入された指示が機微なアクションを起動できないよう guardrail / hook で制御。<br>誤答の定番: temperature 変更(無関係)、システムプロンプトでの「お願い」(強制力なし)、より大きいモデルへの変更(指示追従が良い分、より脆弱になりうる)。</li>
+  <li><strong>guardrail の多層化</strong>(layering): 入力フィルタ+プロンプト設計+出力検証+hook による強制、を重ねる。単層に頼らない。</li>
+  <li><strong>hooks</strong>: 破壊的アクション(削除、閾値超の送金)をコードで確実にブロック。プロンプト指示は確率的なので保証にならない。</li>
+  <li>secure-by-design: 最小権限、identity/access management、認証・認可・機密性・完全性・プライバシー。</li>
+  <li>秘密情報管理: API キーはコードに書かず環境変数・シークレットマネージャへ。開発/本番でキーを分離、ローテーション、アクセス承認とレベル検証、アクセス監視。</li>
+  <li>データ漏えい防止・PII の扱い(規制順守、ログやメモリに PII を残さない)。jailbreak 防御。</li>
+</ul>
+
+<h2 id="d3">Domain 3: Claude Code <span class="weight">3.1%</span></h2>
+<ul>
+  <li><strong>CLAUDE.md 階層</strong>: ユーザー <code>~/.claude/CLAUDE.md</code>(個人・バージョン管理外)→ プロジェクトルート(チーム共有)→ サブディレクトリ(その配下のみ)。「新メンバーに指示が効かない」→ ユーザーレベルに書いてある、が定番の診断。<code>@import</code> でファイル分割、<code>/memory</code> で読み込み状態を確認。</li>
+  <li><strong>.claude/rules/</strong>: YAML frontmatter の <code>paths:</code>(glob)で条件付き読み込み。ディレクトリ横断の規約(<code>**/*.test.tsx</code>)にはサブディレクトリ CLAUDE.md より glob ルールが正解。</li>
+  <li><strong>スラッシュコマンド</strong>: プロジェクト <code>.claude/commands/</code>(リポジトリで共有)vs 個人 <code>~/.claude/commands/</code>。</li>
+  <li><strong>Skills</strong>: <code>.claude/skills/&lt;名前&gt;/SKILL.md</code>。frontmatter: <code>context: fork</code>(隔離実行でメイン会話を汚さない)、<code>allowed-tools</code>(ツール制限)、<code>argument-hint</code>(引数の促し)。Skills = オンデマンド、CLAUDE.md = 常時読み込み。</li>
+  <li><strong>plan mode vs 直接実行</strong>: 大規模変更・複数の妥当なアプローチ・アーキテクチャ判断 → plan mode(先に探索・設計)。明確なスコープの単発修正 → 直接実行。冗長な探索は Explore サブエージェントへ。</li>
+  <li><strong>ヘッドレス/CI</strong>: <code>-p</code>(<code>--print</code>)で非対話実行(これがないと入力待ちでハング)。<code>--output-format json</code> + <code>--json-schema</code> で機械可読な構造化出力。CLAUDE.md でレビュー基準やテスト規約を CI に伝える。</li>
+  <li>セッション管理: <code>--resume</code>、<code>fork_session</code>、<code>/compact</code>、headless/streaming/auto モード。</li>
+</ul>
+
+<h2 id="d4">Domain 4: Eval, Testing, and Debugging <span class="weight">2.6%</span></h2>
+<ul>
+  <li><strong>トレース分析</strong>で失敗モードを特定: どのステップ(分解・ツール選択・ツール実行・合成)で壊れたかをログから切り分ける。下流のエージェントを責める前に上流の入力(コーディネータの分解)を見る。</li>
+  <li><strong>問題の切り分け</strong>: 統合レイヤの問題(認証、タイムアウト、パースエラー)か、モデル出力の問題(誤った判断、ハルシネーション)かをまず区別する。</li>
+  <li>回復戦略の選択: transient エラー → リトライ(指数バックオフ)。validation → 入力修正。business ルール → ユーザーへ説明。permission → エスカレーション。</li>
+  <li>自己レビューの限界: 生成と同じセッションは自分の判断を疑いにくい → <strong>独立したレビューインスタンス</strong>が微妙な問題の検出に優れる。大規模レビューはファイル別パス+横断統合パスに分割(注意の希釈を防ぐ)。</li>
+  <li>集約精度(97%)はセグメントの劣化を隠す → 文書タイプ別・フィールド別に層化サンプリングで検証。モデルの自己申告confidence は較正が必要(ラベル付き検証セットで閾値を決める)。</li>
+</ul>
+
+<h2 id="tables">頻出・判断早見表</h2>
+
+<div class="tablewrap"><table>
+  <tr><th>シナリオ</th><th>正解の方向</th><th>誤答の定番</th></tr>
+  <tr><td>夜間1万件の一括処理、コスト優先</td><td>Batch API(50%オフ・24h以内)</td><td>同期 API 並列(単価は下がらない)、max_tokens 削減、無条件の最小モデル化</td></tr>
+  <tr><td>ツール実行順の業務ルール保証</td><td>hook / プログラム的前提条件でブロック</td><td>システムプロンプト強化、few-shot(どちらも確率的)</td></tr>
+  <tr><td>ツールの誤選択が頻発(説明が1行)</td><td>まず description を拡充(形式・例・境界)</td><td>few-shot 追加、ルーティング層、ツール統合(効くが「最初の一手」ではない)</td></tr>
+  <tr><td>複数アプリで再利用したい社内 API 連携</td><td>MCP サーバー化</td><td>プロンプトにロジック記述、データを毎回貼る、ビルトインツール頼み</td></tr>
+  <tr><td>プロンプトインジェクション(隠し指示)</td><td>untrusted 分離+guardrail/hook+最小権限</td><td>temperature 変更、丁寧なお願い、大きいモデル</td></tr>
+  <tr><td>エスカレーション精度が低い</td><td>明示的基準+few-shot をシステムプロンプトへ</td><td>自己申告 confidence 閾値、感情分析、別の分類モデル(過剰)</td></tr>
+  <tr><td>サブエージェントの結果が偏る/欠落</td><td>コーディネータの分解ログを確認(分解が狭い)</td><td>下流エージェントの調整</td></tr>
+  <tr><td>サブエージェントのタイムアウト伝搬</td><td>構造化エラー(種類・試行内容・部分結果・代替案)</td><td>汎用ステータス、成功と偽装、ワークフロー全体停止</td></tr>
+  <tr><td>チーム全員に配るコマンド/規約</td><td>プロジェクトスコープ(<code>.claude/commands/</code>、ルート CLAUDE.md)</td><td>ユーザースコープ(<code>~/.claude/</code> は共有されない)</td></tr>
+  <tr><td>散在するテストファイルへ共通規約</td><td><code>.claude/rules/</code> + paths glob</td><td>各ディレクトリに CLAUDE.md、巨大な単一 CLAUDE.md</td></tr>
+  <tr><td>モノリス→マイクロサービス分割</td><td>plan mode で探索・設計してから実行</td><td>直接実行で漸進、詳細指示の一括投入</td></tr>
+  <tr><td>CI でハングする</td><td><code>claude -p "..."</code>(非対話モード)</td><td>存在しない env 変数やフラグ、stdin リダイレクト</td></tr>
+  <tr><td>14ファイルの一括レビューが不安定</td><td>ファイル別パス+横断統合パスに分割</td><td>大きいモデル/コンテキスト、開発者に PR 分割を強制、多数決</td></tr>
+  <tr><td>抽出で存在しない値を捏造する</td><td>スキーマを nullable/optional に、few-shot で null 例</td><td>required のまま「捏造するな」と指示</td></tr>
+  <tr><td>長い会話で金額・日付が曖昧化</td><td>case facts ブロックとして要約の外に保持</td><td>要約の精度向上を指示、全履歴保持</td></tr>
+</table></div>
+
+<div class="tablewrap"><table>
+  <tr><th>用語</th><th>一言で</th></tr>
+  <tr><td>stop_reason</td><td>ループ制御の唯一の根拠。<code>tool_use</code>=続行、<code>end_turn</code>=終了</td></tr>
+  <tr><td>tool_choice: any</td><td>必ずどれかのツールを呼ぶ=構造化出力の保証</td></tr>
+  <tr><td>isError / isRetryable</td><td>MCP ツール失敗の通知/リトライ可否の構造化メタデータ</td></tr>
+  <tr><td>context: fork</td><td>Skill を隔離コンテキストで実行し、メイン会話を汚さない</td></tr>
+  <tr><td>PostToolUse</td><td>ツール結果をモデルが読む前に変換する hook</td></tr>
+  <tr><td>MCP リソース</td><td>参照カタログの公開(探索的ツール呼び出しの削減)</td></tr>
+  <tr><td>pause_turn</td><td>サーバーツールの反復上限で中断。そのまま再送で再開</td></tr>
+  <tr><td>adaptive thinking</td><td>モデルが思考の要否と量を自動調整。effort で深さを制御</td></tr>
+</table></div>
+
+<h2 id="quiz">模擬問題演習</h2>
+<div class="callout good">
+  <span class="tag">別ページに移動しました</span>
+  <p>模擬問題は上部タブの専用ページで、採点・分野別集計・選択肢シャッフル付きの実戦形式で解けます。<a href="#practice">模擬問題演習(24問)</a> は要点の確認用、<a href="#scenario">シナリオ100問</a> はブループリントの比重どおりに配分した本番量の演習です。</p>
+</div>
+
+<h2 id="checklist">直前チェックリスト</h2>
+
+<h3>知識の最終確認</h3>
+<ul class="checklist">
+  <li>stop_reason 6種(end_turn / tool_use / max_tokens / stop_sequence / pause_turn / refusal)を説明できる</li>
+  <li>Batch API: 50%オフ・24時間・custom_id・順不同・マルチターンツール不可</li>
+  <li>キャッシュ: プレフィックス一致・tools→system→messages・書き込み1.25倍/読み取り0.1倍・usage で検証</li>
+  <li>Opus / Sonnet / Haiku の使い分けを「品質・レイテンシ・コスト」で言える</li>
+  <li>エージェントループのアンチパターン3つ(NLパース終了判定・一律回数上限・テキスト有無判定)</li>
+  <li>サブエージェント: コンテキスト非継承・単一応答で並列 Task・ハブ&スポーク</li>
+  <li>hook = 決定論的保証、プロンプト = 確率的、の対比</li>
+  <li>tool_choice: auto / any / 特定ツール強制の違い</li>
+  <li>構造化出力: tool_use+スキーマは構文を保証するが意味エラーは防がない。nullable で捏造防止</li>
+  <li>MCP: .mcp.json(プロジェクト共有)vs ~/.claude.json(個人)、env 展開、リソース=カタログ</li>
+  <li>CLAUDE.md 階層(ユーザー/プロジェクト/ディレクトリ)と .claude/rules の paths glob</li>
+  <li>Skills frontmatter: context: fork / allowed-tools / argument-hint</li>
+  <li>CI: -p 非対話、--output-format json、独立レビューインスタンス</li>
+  <li>インジェクション対策: 分離・最小権限・guardrail 多層化(temperature やお願いは誤答)</li>
+  <li>リトライが効くのは形式エラーのみ、情報欠損には無力</li>
+</ul>
+
+<h3>試験運営(当日)</h3>
+<ul class="checklist">
+  <li>政府発行の写真付き身分証(登録名と<strong>完全一致</strong>している必要あり。相違があれば事前に certifications-support@anthropic.com へ)</li>
+  <li>予約変更・キャンセルは<strong>24時間前まで</strong>。以降は受験料没収</li>
+  <li>オンライン監督の場合: 机上をクリアに(メモ・携帯・スマートウォッチ・イヤホン・2枚目モニタ不可)、常時カメラ内に</li>
+  <li>開始前に NDA への同意が必須(同意しないと終了・返金なし)。問題の記録・共有は資格剥奪の対象</li>
+  <li>不合格時の再受験待機: 1回目14日 → 2回目30日 → 3回目90日、ローリング12ヶ月で最大4回</li>
+  <li>合格後: 12ヶ月有効。期限内更新は Partner Academy の無料・非監督アセスメント。失効すると全額でフル再受験</li>
+</ul>
+
+<div class="callout good">
+  <span class="tag">解答戦略</span>
+  <p>120分で53問 = 1問あたり約2分強。まず全問を1周し、迷う問題はフラグを立てて後回しに。選択肢の比較では「<strong>動くかどうか</strong>」ではなく「<strong>問題文が示す制約(コスト・レイテンシ・保証・再利用性)に最も合うか</strong>」で選ぶこと。「プロンプトで頑張る」系の選択肢は、保証が必要な文脈では原則誤答です。</p>
+</div>
+
+<footer class="foot">
+  <p>出典: Claude Certified Developer – Foundations Exam Guide v1.0(CCDV-F)/ Claude Certified Architect – Foundations Exam Guide v1.0(CCAR-F)。模擬問題は本試験の実問題ではなく、公式サンプル問題の形式・認知レベルに合わせた学習用のオリジナル問題です。</p>
+</footer>
+</main>
+
+<!-- ============================ PRACTICE VIEW ============================ -->
+<main id="view-practice" hidden>
+<header class="top">
+  <p class="eyebrow">CCDV-F Practice Questions</p>
+  <h1>模擬問題演習</h1>
+  <p class="lede">全24問・英語出題(本試験と同形式)。選択肢をクリックすると即時採点され、解説(日本語)と「英語の用法」が表示されます。<strong>選択肢の並びは毎回シャッフル</strong>されるので、記号でなく内容で覚えているか確認できます。出題比重に合わせて D2・D5 を厚めにしています。</p>
+</header>
+
+<div class="qtoolbar">
+  <span class="score" id="score-line-p">解答済み 0 / 24 ・ <span class="ok">正解 0</span></span>
+  <span class="spacer"></span>
+  <button class="btn" id="btn-optshuffle-p" type="button">選択肢をシャッフル</button>
+  <button class="btn" id="btn-result-p" type="button">分野別の結果を見る</button>
+  <button class="btn primary" id="btn-reset-p" type="button">リセット</button>
+</div>
+
+<div class="chips" id="chips-p" role="group" aria-label="分野フィルタ"></div>
+
+<div class="result" id="result-panel-p" hidden>
+  <h3>分野別正答率</h3>
+  <div id="result-bars-p"></div>
+  <p style="font-size:13px;color:var(--ink-faint);margin-bottom:0;">本試験はスケールスコア(100–1,000、合格720)なので単純な正答率とは一致しませんが、目安として<strong>全体で約7〜8割</strong>を安定して取れる状態を目指してください。</p>
+</div>
+
+<div id="quiz-root-p"></div>
+
+<footer class="foot">
+  <p>模擬問題は本試験の実問題ではなく、公式サンプル問題(CCDV-F 3問+CCAR-F 12問)の形式・認知レベルに合わせた学習用のオリジナル問題です。解答状況はページを再読み込みするとリセットされます。</p>
+</footer>
+</main>
+
+<!-- ============================ SCENARIO VIEW ============================ -->
+<main id="view-scenario" hidden>
+<header class="top">
+  <p class="eyebrow">CCDV-F Scenario Bank · 100 items</p>
+  <h1>シナリオ100問</h1>
+  <p class="lede">公式 Exam Guide のブループリントを<strong>スキル単位の比重</strong>まで分解して配分した、シナリオベースの100問(英語出題)。複数選択問題は英文中に <code>(Select TWO.)</code> と明記しています。</p>
+</header>
+
+<div class="callout">
+  <span class="tag">この100問の配分</span>
+  <p>D2 33 / D5 17 / D1 15 / D6 11 / D8 10 / D7 8 / D3 3 / D4 3。ドメイン内もスキル比重に合わせており、見落とされがちな <strong>Software Engineering Foundations(7.4%・単一スキルで最大)</strong> や <strong>Technical Fundamentals(6.1%)</strong>、<strong>Systems Life Cycle(2.8%)</strong> — Claude 固有知識ではなく一般的なソフトウェア工学の判断を問う領域 — もカバーしています。</p>
+</div>
+
+<details style="margin:16px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;">
+  <summary style="cursor:pointer;font-weight:700;">設問でくり返し出る英語表現(先に目を通すと速く読めます)</summary>
+  <div class="tablewrap" style="margin-top:12px;"><table>
+    <tr><th>表現</th><th>意味・出題上の役割</th></tr>
+    <tr><td>Which approach best fits ~?</td><td>複数動く中から「最適」を選ばせる。制約条件が判断軸</td></tr>
+    <tr><td>What is the most likely cause?</td><td>症状から原因を推定。選択肢は全部ありえるが確率が違う</td></tr>
+    <tr><td>Which is the most effective mitigation?</td><td>対策の有効性を比較。「強制力があるか」で切る</td></tr>
+    <tr><td>What should the team do first?</td><td>順序を問う。「効く施策」と「最初の一手」は別物</td></tr>
+    <tr><td>~ is the primary concern</td><td>評価軸の宣言(cost / latency / reliability)</td></tr>
+    <tr><td>without changing ~</td><td>制約の明示。これに反する選択肢は自動的に誤答</td></tr>
+    <tr><td>intermittently / sporadically</td><td>「断続的に」。transient エラー・リトライ系の合図</td></tr>
+    <tr><td>latency-tolerant / not needed until ~</td><td>「遅延を許容できる」= Batch API の合図</td></tr>
+    <tr><td>must be guaranteed / enforced</td><td>「保証・強制が必要」= プロンプトでなく hook / コード</td></tr>
+    <tr><td>reusable across several applications</td><td>「複数アプリで再利用」= MCP サーバー化の合図</td></tr>
+    <tr><td>Select TWO.</td><td>複数選択の明示。本試験も選択数を必ず明記する</td></tr>
+  </table></div>
+</details>
+
+<div class="qtoolbar">
+  <span class="score" id="score-line-s">解答済み 0 / 100 ・ <span class="ok">正解 0</span></span>
+  <span class="spacer"></span>
+  <button class="btn" id="btn-optshuffle-s" type="button">選択肢をシャッフル</button>
+  <button class="btn" id="btn-shuffle-s" type="button">出題順をシャッフル</button>
+  <button class="btn" id="btn-result-s" type="button">分野別の結果を見る</button>
+  <button class="btn primary" id="btn-reset-s" type="button">リセット</button>
+</div>
+
+<div class="chips" id="chips-s" role="group" aria-label="分野フィルタ"></div>
+
+<div class="result" id="result-panel-s" hidden>
+  <h3>分野別正答率</h3>
+  <div id="result-bars-s"></div>
+  <p style="font-size:13px;color:var(--ink-faint);margin-bottom:0;">出題比重が高い D2・D5・D1 で 8割を切る場合は、その分野を優先して復習してください。D3・D4 は各3問しかないので、正答率のブレは大きく出ます。</p>
+</div>
+
+<div id="quiz-root-s"></div>
+
+<footer class="foot">
+  <p>本試験の実問題ではなく、Exam Guide のブループリントに沿って作成した学習用のオリジナル問題です。解答状況はページを再読み込みするとリセットされます。</p>
+</footer>
+</main>
+
+<script>
+/* ---------- question data: practice (24) ---------- */
+const PRACTICE_Q = [
+{n:1, dom:"D2", multi:false,
+ stem:`A team must classify 5,000 support tickets every night. Results are not needed until the following morning, and cost is the primary concern. Which approach best fits the requirement?`,
+ opts:[`Send every request synchronously through the Messages API in parallel to finish as quickly as possible.`,
+       `Submit the requests to the Message Batches API, including a custom_id for each request.`,
+       `Stream every response to process tickets in real time.`,
+       `Minimize max_tokens on synchronous calls to reduce cost.`],
+ ans:[1],
+ expl:`レイテンシ許容・大量・非ブロッキングは Batch API の典型(50%割引、24時間以内)。{{0}} は速いだけで単価が下がらない。{{2}} は UI 表示用でコスト無関係。{{3}} は出力品質を壊すだけ。`,
+ vocab:[["not needed until the following morning","「翌朝まで不要」= latency-tolerant(遅延許容)の合図。この一文が出たらほぼ Batch API"],
+        ["cost is the primary concern","「コストが最優先の関心事」。primary concern は問題の評価軸を宣言する定型"],
+        ["Which approach best fits ...?","「どれが最も適合するか」。正しい選択肢が複数動く中で“最適”を選ばせる頻出の聞き方"]]},
+{n:2, dom:"D2", multi:false,
+ stem:`When processing results from the Message Batches API, which implementation detail is most important?`,
+ opts:[`Assume the results are returned in the original submission order.`,
+       `Correlate each result with its request using the custom_id field.`,
+       `Receive the results in real time by streaming them as they finish.`,
+       `Perform multi-turn tool calling within a single batch request.`],
+ ans:[1],
+ expl:`結果は順不同で返るため custom_id で対応付けるのが必須。{{2}} はバッチに存在しない。{{3}} はバッチの制約上不可能(マルチターンのツール実行は非対応)。`,
+ vocab:[["correlate A with B","「A と B を対応付ける」。custom_id の説明で公式ガイドも correlating request/response pairs と表現"],
+        ["in submission order","「投入した順に」。Batch では保証されない、が知識ポイント"],
+        ["within a single batch request","「1つのバッチリクエストの中で」。within は制約範囲を示す前置詞で選択肢文に多い"]]},
+{n:3, dom:"D2", multi:false,
+ stem:`An application shares a large system prompt across frequent requests, but usage.cache_read_input_tokens is always zero. What is the most likely cause?`,
+ opts:[`The cache TTL expired between the requests that share the prompt.`,
+       `A timestamp at the start of the system prompt makes every prefix unique.`,
+       `The one-hour cache TTL option was not enabled for these requests.`,
+       `The model in use does not support prompt caching for system blocks.`],
+ ans:[1],
+ expl:`キャッシュはプレフィックス一致。先頭で毎回変わる値(タイムスタンプ、UUID)があると全リクエストが別プレフィックスになり一度もヒットしない。TTL の長短はヒットが「時々」起きる場合の論点。`,
+ vocab:[["the most likely cause","「最も可能性の高い原因」。トラブルシュート問題の定番の聞き方(likely = probable)"],
+        ["interpolate","文字列に値を「埋め込む」(テンプレート展開)。f-string の説明などで頻出"],
+        ["invalidate the cache","キャッシュを「無効化する」。invalidation とセットで覚える"]]},
+{n:4, dom:"D2", multi:false,
+ stem:`Which placement makes prompt caching most effective?`,
+ opts:[`Put the varying user question first and the stable document after it.`,
+       `Place stable content first and volatile content at the end of the prompt.`,
+       `Add a cache_control marker to every content block in the request.`,
+       `Only the messages array can be cached, so move content there.`],
+ ans:[1],
+ expl:`レンダリング順は tools → system → messages。安定部分を前に置き、その末尾にブレークポイント。ブレークポイントは1リクエスト最大4個で、全ブロックに付ける必要はない。`,
+ vocab:[["stable / volatile","「安定した/変動しやすい」。キャッシュ文脈の対語。volatile content = 毎回変わる内容"],
+        ["placement","「配置」。breakpoint placement(ブレークポイントの置き場所)という形で頻出"],
+        ["prefix","「接頭辞=先頭部分」。prompt caching is a prefix match が核心フレーズ"]]},
+{n:5, dom:"D2", multi:false,
+ stem:`A response returns <code>stop_reason: "max_tokens"</code>. What does this indicate?`,
+ opts:[`The model finished its response naturally and no action is needed.`,
+       `The output may be truncated, so raise max_tokens or use streaming.`,
+       `The conversation exceeded the context window and must be trimmed down.`,
+       `The request was refused for safety reasons and should not be retried.`],
+ ans:[1],
+ expl:`max_tokens は要求した出力上限への到達。自然終了は end_turn、拒否は refusal。切り捨てられた出力をそのまま使うのは defensive parsing の観点でも NG。`,
+ vocab:[["truncate","「途中で切り捨てる」。truncated output(尻切れの出力)は max_tokens 問題のキーワード"],
+        ["What does this indicate?","「これは何を示すか」。ステータス値の解釈を問う定型"],
+        ["exceed the context window","「コンテキストウィンドウを超過する」。exceed は上限超過の標準動詞"]]},
+{n:6, dom:"D2", multi:false,
+ stem:`A developer is building a chat UI that must display the response as it is generated. Which API feature should they use?`,
+ opts:[`The Message Batches API.`,
+       `Streaming — render content_block_delta events incrementally.`,
+       `Polling for the completed response.`,
+       `A smaller max_tokens to speed up generation.`],
+ ans:[1],
+ expl:`リアルタイム表示 = streaming。トークンは content_block_delta イベントで届く。大きな出力(long-form)でも HTTP タイムアウト回避のためストリーミングが推奨される。`,
+ vocab:[["as it is generated","「生成されるそばから」。リアルタイム性の要求を示す as 節。見たら streaming"],
+        ["incrementally","「少しずつ・逐次的に」。delta(差分)と同じ文脈で使われる"],
+        ["poll / polling","「定期的に問い合わせる」。push 型の streaming との対比で出る"]]},
+{n:7, dom:"D2", multi:false,
+ stem:`How should a team guard against unexpected behavior changes in production when new model versions are released?`,
+ opts:[`Always reference the latest model alias so upgrades are picked up.`,
+       `Pin a specific model version and upgrade only after running evals.`,
+       `Select a model at random per request to spread out the risk.`,
+       `Set temperature to 0 so that outputs stay identical across releases.`],
+ ans:[1],
+ expl:`リリース間で挙動が変わりうる(breaking behavior changes)ため、バージョンピン+eval が構成管理の定石。temperature 0 でも決定論は保証されない。`,
+ vocab:[["pin a version","バージョンを「固定する」。model version pinning は公式ガイドの用語そのまま"],
+        ["guard against ~","「〜から守る・備える」。mitigate / protect against と同系"],
+        ["breaking behavior changes","「互換性を壊す挙動変化」。breaking change はソフトウェア一般の頻出語"]]},
+{n:8, dom:"D5", multi:false,
+ stem:`A service performs simple sentiment classification on one million items per day with strict latency requirements. Which model choice best fits?`,
+ opts:[`Opus, for maximum accuracy on every incoming support ticket.`,
+       `Haiku, the fastest and cheapest option for this simple task.`,
+       `Sonnet with extended thinking enabled for consistent classification.`,
+       `Opus with the highest effort level to avoid misclassification.`],
+ ans:[1],
+ expl:`単純タスク×大量×低レイテンシは Haiku の典型。thinking や高 effort は単純分類には過剰でコストとレイテンシを悪化させるだけ。`,
+ vocab:[["strict latency requirements","「厳しい遅延要件」= 速さ最優先の合図。latency-sensitive とも言う"],
+        ["cost-effective","「費用対効果が高い」。Haiku の説明の決まり文句(fastest and most cost-effective)"],
+        ["sentiment classification","「感情分類」。simple task の代表例として選択肢に出やすい"]]},
+{n:9, dom:"D5", multi:false,
+ stem:`To improve quality on a complex multi-step reasoning task, which parameter strategy is appropriate?`,
+ opts:[`Increase temperature so the model considers more possible answers.`,
+       `Enable extended thinking and raise the effort level.`,
+       `Chain three separate calls and merge their partial conclusions.`,
+       `Switch to zero-shot prompting to remove any misleading examples.`],
+ ans:[1],
+ expl:`思考の深さは thinking(extended/adaptive)+ effort レベルで制御する。temperature は多様性の話で推論品質の主要レバーではない。`,
+ vocab:[["multi-step reasoning","「多段階の推論」。thinking / effort が正解になる文脈のキーワード"],
+        ["raise / lower the effort level","effort は raise(上げる)/ lower(下げる)で言う。set effort to high も可"],
+        ["appropriate","「適切な」。which is (most) appropriate は best fits と並ぶ定番の聞き方"]]},
+{n:10, dom:"D5", multi:true,
+ stem:`Monthly API costs exceed the budget. Which two measures should be considered first while preserving output quality? (Select TWO.)`,
+ opts:[`Introduce prompt caching for shared prefixes.`,
+       `Move latency-tolerant workloads to the Message Batches API.`,
+       `Switch every task to the smallest model regardless of quality.`,
+       `Keep the full conversation history in context at all times.`],
+ ans:[0,1],
+ expl:`品質に影響せずコストを下げる二大レバー。{{2}} は品質要件を無視した一括変更で誤答(タスク別に見合うモデルを選ぶのが正しい)。{{3}} はコスト増加要因。`,
+ vocab:[["(Select TWO.)","複数選択の指定。本試験でも「何個選ぶか」は必ず問題文に明記される"],
+        ["while preserving ~","「〜を保ちながら」。品質を落とす選択肢を除外させる制約句"],
+        ["regardless of quality","「品質を無視して」。regardless of ~ が付いた選択肢は大抵ワナ"],
+        ["latency-tolerant","「遅延を許容できる」。tolerant(許容)⇔ sensitive(敏感)の対で覚える"]]},
+{n:11, dom:"D5", multi:false,
+ stem:`Which statement about large language models is correct?`,
+ opts:[`Identical inputs always produce identical outputs from the model.`,
+       `They generate text by next-token prediction and are non-deterministic.`,
+       `The context window applies only to the input tokens, not output.`,
+       `Token counts always equal character counts in the submitted text.`],
+ ans:[1],
+ expl:`LLM は次トークン予測で非決定的。コンテキストウィンドウは入出力合計、トークンは文字と1対1ではない。`,
+ vocab:[["non-deterministic","「非決定的」(同じ入力でも出力が揺れる)。deterministic guarantee(決定論的保証)の対義"],
+        ["next-token prediction","「次トークン予測」。LLM の動作原理を表す固定フレーズ"],
+        ["Which statement ... is correct?","知識確認型の聞き方。always / only / never を含む選択肢は誤りやすい(過度な断定)"]]},
+{n:12, dom:"D1", multi:false,
+ stem:`Which implementation correctly terminates an agentic loop?`,
+ opts:[`Stop when the response text contains the word done anywhere in it.`,
+       `Continue while stop_reason is tool_use and stop when it is end_turn.`,
+       `Always stop after five iterations regardless of the current state.`,
+       `Stop whenever the assistant message contains at least one text block.`],
+ ans:[1],
+ expl:`ループ制御は stop_reason ベースが唯一の正解。自然言語パース・一律の回数上限・テキスト有無での判定はすべてガイド明記のアンチパターン。`,
+ vocab:[["terminate","ループ・プロセスを「終了させる」。loop termination conditions(終了条件)で頻出"],
+        ["iteration cap","「反復回数の上限」。arbitrary iteration caps as the primary stopping mechanism がアンチパターンの公式表現"],
+        ["parse natural language signals","「自然言語の合図をパースする」。これもアンチパターンの言い回しとして覚える"]]},
+{n:13, dom:"D1", multi:false,
+ stem:`When a coordinator delegates a task to a subagent, which statement is true?`,
+ opts:[`The subagent automatically inherits the coordinator's history and constraints.`,
+       `All required context must be included explicitly in the subagent's prompt.`,
+       `Subagents communicate directly with each other to share what they found.`,
+       `Context is synchronized automatically through a shared memory area.`],
+ ans:[1],
+ expl:`サブエージェントは隔離されたコンテキストで動き、親の履歴を継承しない。通信はコーディネータ経由(ハブ&スポーク)にルーティングして可観測性と一貫したエラー処理を確保する。`,
+ vocab:[["delegate a task to ~","「タスクを〜へ委譲する」。delegation(委譲)は multi-agent 問題の中心語"],
+        ["inherit","「継承する」。do not inherit context automatically が公式の表現"],
+        ["prior findings","「前段の調査結果」。findings は「発見・所見」で、research/review 系で頻出"],
+        ["explicitly","「明示的に」。⇔ implicitly。explicit context passing が正解側のキーワード"]]},
+{n:14, dom:"D1", multi:false,
+ stem:`In 12% of cases the agent calls process_refund before get_customer has verified the customer, occasionally causing incorrect refunds. What change would most effectively address this reliability issue?`,
+ opts:[`Enhance the system prompt to state that verification is mandatory before any refund.`,
+       `Add few-shot examples showing the agent always calling get_customer first.`,
+       `Add a programmatic prerequisite that blocks process_refund until get_customer has returned a verified customer ID.`,
+       `Implement a routing classifier that enables only the subset of tools appropriate for each request type.`],
+ ans:[2],
+ expl:`金銭が絡む決定論的コンプライアンスはプログラム的強制(hook / prerequisite gate)。プロンプトと few-shot は確率的で失敗率が残る。{{3}} はツールの「順序」でなく「可用性」の解決策でズレている。CCAR-F 公式サンプル問題そのままの型。`,
+ vocab:[["programmatic prerequisite","「プログラムによる前提条件」。prerequisite(前提)は hook 系の正解キーワード"],
+        ["deterministic guarantees / probabilistic compliance","「決定論的保証/確率的な遵守」。この対比が見えたら hook が正解"],
+        ["address the issue","「問題に対処する」。solve より頻出。most effectively address = 最も効果的に対処"],
+        ["mandatory","「必須の」。プロンプトで mandatory と書くだけでは保証にならない、が出題意図"]]},
+{n:15, dom:"D1", multi:false,
+ stem:`How should a coordinator run several independent research tasks in parallel?`,
+ opts:[`Issue one Task tool call per turn.`,
+       `Emit multiple Task tool calls in a single coordinator response.`,
+       `Have each subagent spawn the next subagent.`,
+       `Run the same task three times and take a majority vote.`],
+ ans:[1],
+ expl:`並列実行は単一応答での複数 Task 発行。ターンをまたぐと逐次実行になる。委譲はコーディネータが行い、深いネストは避ける。`,
+ vocab:[["emit","ツール呼び出しを「発行する」。emitting multiple Task tool calls in a single response が公式の言い回し"],
+        ["spawn","サブエージェントを「起動する・生成する」。spawning subagents は定番動詞"],
+        ["in a single response vs across separate turns","「1応答内で」vs「複数ターンにまたがって」。並列/逐次を分ける対句"]]},
+{n:16, dom:"D6", multi:false,
+ stem:`An automated code review produces too many false positives and developers are losing trust in it. What is the most effective first step?`,
+ opts:[`Instruct the model to report only its high-confidence findings.`,
+       `Define which categories to report and which categories to skip.`,
+       `Tell the model to be conservative in what it reports.`,
+       `Route each file through two independent review passes.`],
+ ans:[1],
+ expl:`「保守的に」「高confidenceのみ」のような一般的指示は精度を改善しない、と CCAR-F ガイドに明記。カテゴリベースの明示的基準が正解。誤検知の多いカテゴリの一時無効化も有効な手。`,
+ vocab:[["false positive","「誤検知」(問題でないものを問題と報告)。⇔ false negative(見逃し)。precision / recall とセット"],
+        ["explicit criteria","「明示的な基準」。criteria は criterion の複数形。vague instructions(曖昧な指示)との対比で正解側"],
+        ["undermine / lose trust","「信頼を損なう」。high false positive rates undermine developer trust が公式の表現"]]},
+{n:17, dom:"D6", multi:false,
+ stem:`An order-lookup tool returns more than 40 fields per call, and long sessions exhaust the context window. What is the best remedy?`,
+ opts:[`Move to a model with a much larger context window.`,
+       `Trim tool outputs to the relevant fields before they accumulate.`,
+       `Re-summarize the entire conversation at the end of every turn.`,
+       `Raise the per-turn output limit so more content can be processed.`],
+ ans:[1],
+ expl:`コンテキスト逼迫の第一手は蓄積前のツール出力の刈り込み。{{0}} は問題(無関係トークンの蓄積)を先送りするだけ。要約は数値・日付の曖昧化リスクがある。`,
+ vocab:[["trim ~ to only the relevant fields","「関連フィールドだけに刈り込む」。trimming verbose tool outputs が公式の表現"],
+        ["accumulate","「蓄積する」。tool results accumulate in context(ツール結果がコンテキストに溜まる)"],
+        ["exhaust","「使い果たす」。context window exhaustion = コンテキスト枯渇"],
+        ["remedy","「対処法・改善策」。fix / mitigation の言い換え"]]},
+{n:18, dom:"D6", multi:false,
+ stem:`An invoice-extraction pipeline fabricates a due date when the source document does not contain one. Which fix is correct?`,
+ opts:[`Keep the field required and instruct the model never to fabricate values.`,
+       `Make the field nullable and add few-shot examples returning null.`,
+       `Increase the retry count so a later attempt finds the value.`,
+       `Validate the extraction against a checksum computed from the document.`],
+ ans:[1],
+ expl:`required フィールドは値の捏造を誘発する。存在しない可能性がある項目は optional/nullable にし、few-shot で欠損時の挙動を示す。情報が存在しないケースはリトライしても解決しない。`,
+ vocab:[["fabricate","値を「捏造する」。preventing the model from fabricating values が公式表現。hallucinate の類語"],
+        ["absent","「存在しない」。information absent from the source(元文書に存在しない情報)はリトライ無効の合図"],
+        ["nullable / optional","「null 許容/任意」。required(必須)との対比がスキーマ設計問題の軸"]]},
+{n:19, dom:"D8", multi:false,
+ stem:`Multiple extraction schemas exist and the document type is unknown, but structured output must be guaranteed. Which tool_choice setting is correct?`,
+ opts:[`tool_choice: {"type": "auto"}`,
+       `tool_choice: {"type": "any"}`,
+       `tool_choice: {"type": "tool", "name": "extract_invoice"}`,
+       `tool_choice: {"type": "none"}`],
+ ans:[1],
+ expl:`"any" は「必ずいずれかのツールを呼ぶ」保証(どれかはモデルが選ぶ)。"auto" は会話テキストで返す可能性が残る。特定ツールの強制は文書タイプが既知の場合。`,
+ vocab:[["guarantee structured output","「構造化出力を保証する」。guarantee が出たら auto では不十分、が判断基準"],
+        ["forced tool selection","「特定ツールの強制」。type: tool + name の公式呼称"],
+        ["the model may return text instead of calling a tool","auto の説明の決まり文句。instead of ~ing(〜する代わりに)"]]},
+{n:20, dom:"D8", multi:false,
+ stem:`Which error design best enables an agent to recover from MCP tool failures?`,
+ opts:[`Return a generic "Operation failed" message for every failure.`,
+       `Return an errorCategory, an isRetryable flag, and a readable description.`,
+       `Return an empty result marked as successful so the workflow continues.`,
+       `Propagate the exception to a top-level handler that terminates the entire workflow.`],
+ ans:[1],
+ expl:`構造化エラーがエージェントの回復判断(リトライすべきか、ユーザーに説明すべきか)を可能にする。{{0}} は情報を隠し、{{2}} はエラーの隠蔽(anti-pattern)、{{3}} は回復可能な失敗まで全停止する anti-pattern。`,
+ vocab:[["transient","「一時的な」(タイムアウト・一時的障害)。transient errors are retryable が基本原則"],
+        ["retryable","「リトライ可能な」。isRetryable boolean はガイド記載のフィールド名"],
+        ["propagate","エラーを「伝搬させる」。⇔ suppress(握りつぶす)。両極端がどちらも anti-pattern"],
+        ["human-readable","「人間可読の」。machine-readable(機械可読)との対"]]},
+{n:21, dom:"D8", multi:false,
+ stem:`How should a team-shared MCP server and its authentication token be configured?`,
+ opts:[`In each developer's ~/.claude.json with the token hardcoded in the file.`,
+       `In the project's .mcp.json, with the token passed via environment variable expansion.`,
+       `In the project's .mcp.json with the token value committed directly.`,
+       `In the system prompt, so the model can present it when needed.`],
+ ans:[1],
+ expl:`チーム共有はプロジェクトスコープの .mcp.json(バージョン管理)、秘密情報は環境変数展開でコミットしない。~/.claude.json は個人・実験用。`,
+ vocab:[["environment variable expansion","「環境変数展開」。credential management without committing secrets とセットで公式表現"],
+        ["hardcode","「直書きする」。hardcoded credentials は常に誤答側"],
+        ["commit secrets","「秘密情報をコミットする」。without committing secrets(コミットせずに)が正解側の句"],
+        ["project-level vs user-level","「プロジェクトスコープ/ユーザースコープ」。shared team tooling vs personal/experimental の対比"]]},
+{n:22, dom:"D7", skill:"公式サンプル", multi:false,
+ stem:`An agent summarizes web pages submitted by end users. One page contains hidden text instructing the model to ignore previous instructions and reveal its system prompt. Which mitigation is most effective?`,
+ opts:[`Raise the model's temperature so its behavior is harder to predict.`,
+       `Treat retrieved page content as untrusted input, keep it separate from trusted instructions, and use guardrails or hooks so injected instructions cannot trigger sensitive actions.`,
+       `Add a line to the system prompt asking users not to include malicious instructions.`,
+       `Switch to a larger model that follows instructions more reliably.`],
+ ans:[1],
+ expl:`CCDV-F 公式サンプル問題そのままの型。分離+最小権限+guardrail が正解。temperature は無関係、お願いは強制力なし、指示追従が良いモデルはむしろ注入に敏感になりうる(can be more susceptible, not less)。`,
+ vocab:[["mitigation","「緩和策」。Which mitigation is most effective? はセキュリティ問題の定型"],
+        ["untrusted input","「信頼できない入力」。isolate untrusted content from trusted instructions が正解の骨格"],
+        ["trigger sensitive actions","「機微なアクションを起動する」。injected text cannot invoke sensitive tools とも言う"],
+        ["susceptible","「(攻撃を)受けやすい」。a more instruction-following model can be more susceptible が公式解説の言い回し"]]},
+{n:23, dom:"D3", multi:false,
+ stem:`You want a custom /review slash command that runs the team's standard checklist to be available to every developer who clones or pulls the repository. Where should the command file be created?`,
+ opts:[`In the .claude/commands/ directory in the project repository.`,
+       `In ~/.claude/commands/ in each developer's home directory.`,
+       `In the CLAUDE.md file at the project root.`,
+       `In a .claude/config.json file with a commands array.`],
+ ans:[0],
+ expl:`CCAR-F 公式サンプル問題そのままの型。プロジェクトスコープのスラッシュコマンドは .claude/commands/ でバージョン管理され、clone/pull で全員に行き渡る。{{1}} は個人用で共有されない。{{2}} は指示・コンテキスト用でコマンド定義の場所ではない。{{3}} は存在しない仕組み。`,
+ vocab:[["version-controlled","「バージョン管理されている」。shared via version control が「チーム共有」正解側の目印"],
+        ["available to every developer who clones the repo","「clone した全員が使える」= project-scoped を選ばせる条件節"],
+        ["Where should ... be created?","配置場所を問う定型。場所問題はスコープ(project / user)の理解を試している"]]},
+{n:24, dom:"D4", multi:false,
+ stem:`An extraction pipeline reports 97% overall accuracy, yet quality complaints persist. What should be validated before expanding automation?`,
+ opts:[`Nothing — overall accuracy is high, so automation can be expanded.`,
+       `Validate accuracy by document type and field with stratified random sampling.`,
+       `Automate every extraction whose self-reported confidence score is high.`,
+       `Re-run the pipeline weekly so drift is caught by the next report.`],
+ ans:[1],
+ expl:`集約精度は特定セグメントの劣化を隠す。セグメント別検証+層化サンプリング+ラベル付き検証セットでの confidence 較正が正解。自己申告 confidence は較正なしでは信頼できない。`,
+ vocab:[["aggregate metrics may mask ~","「集約指標が〜を隠しうる」。mask(覆い隠す)は品質検証問題のキーワード"],
+        ["stratified random sampling","「層化ランダムサンプリング」。セグメントごとに抽出して監査する手法名"],
+        ["self-reported confidence is poorly calibrated","「自己申告の確信度は較正が悪い」。calibrate(較正する)とセットで正誤判断に直結"],
+        ["persist","「(苦情・問題が)続く」。yet ~ persist は「数字は良いのに問題が残る」シナリオの導入句"]]}
+];
+
+/* ---------- question data: scenario bank (100) ---------- */
+const SCENARIOS = [
+
+/* ===== D2 · Claude Application Design (9) ===== */
+{n:1, dom:"D2", skill:"App Design", multi:false,
+ stem:`A prompt that produces well-formatted answers in the claude.ai web interface returns terse, unformatted text when the same wording is sent through the Messages API. Nothing else about the request changed. What is the most likely cause?`,
+ opts:[`The web interface supplies its own system prompt and defaults that the API request does not include.`,
+       `The web interface runs a different model family than the one exposed through the Messages API.`,
+       `The API silently strips markdown formatting from assistant responses before returning them.`,
+       `The API applies a lower default temperature, which suppresses formatting in the output.`],
+ ans:[0],
+ expl:`インターフェースごとに指示の解釈経路が違う、が出題ポイント。claude.ai は独自のシステムプロンプトと既定の振る舞いを持つため、同じ文面でも出力が変わる。API では system プロンプトが唯一の「開発者の声」で、形式要件は明示的に書く必要がある。{{1}} はモデルの違いではなく足回りの違い。{{2}} の除去処理は存在しない。{{3}} は temperature の効果ではない。`,
+ vocab:[["Nothing else about the request changed","「他は何も変えていない」。変数を1つに絞る定型で、差分の原因を推論させる合図"]]},
+
+{n:2, dom:"D2", skill:"App Design", multi:false,
+ stem:`A document review application inserts the full text of user-uploaded files directly into the system prompt, right after the review rules. Reviewers report that some documents change how the assistant behaves. Which design change addresses the root cause?`,
+ opts:[`Move the document into a user turn and wrap it in delimiters marked as untrusted content.`,
+       `Shorten the review rules so that the document occupies a smaller share of the system prompt.`,
+       `Append a sentence to the system prompt telling the model to ignore instructions in documents.`,
+       `Move the review rules below the document so they are the last thing read.`],
+ ans:[0],
+ expl:`信頼できる指示と untrusted な入力を同じ領域に混ぜたことが原因。コンテンツ境界を引き、文書は user ターンに区切り付きで置くのが設計上の正解。{{2}} は強制力のないお願い、{{3}} は順序を変えるだけで信頼境界を作っていない。{{1}} は境界の問題を量の問題にすり替えている。`,
+ vocab:[["addresses the root cause","「根本原因に対処する」。症状の緩和策と区別させるための言い回し"]]},
+
+{n:3, dom:"D2", skill:"App Design", multi:false,
+ stem:`A support tool keeps one long-running conversation per agent and reuses it across every customer case for the whole shift. Agents report that details from earlier customers occasionally appear in later replies. Which change best fixes this?`,
+ opts:[`Start a fresh conversation for each case so no prior case data remains in the context.`,
+       `Add an instruction at the end of every turn telling the model to forget earlier cases.`,
+       `Summarize the conversation between cases and keep only that summary in the session.`,
+       `Increase the context window limit so earlier cases are less likely to be truncated.`],
+ ans:[0],
+ expl:`セッション衛生(session hygiene)の問題。ケースをまたいで履歴を持ち回れば、過去の顧客情報がコンテキストに残り続ける。ケース単位でセッションを分けるのが設計上の解。{{1}} は確率的で保証にならず、{{2}} は要約の中に前の顧客の情報が残る、{{3}} はむしろ古い情報を長く保持する。`,
+ vocab:[["reuses it across every customer case","「全案件で使い回す」。across ~ は境界をまたぐ運用を示し、多くの場合これ自体が誤り"]]},
+
+{n:4, dom:"D2", skill:"App Design", multi:false,
+ stem:`A tool that files internal tickets accepts a priority value. Free-text priorities such as "urgent-ish" and "P1?" keep reaching the ticketing system and failing validation there. Which schema change best prevents this?`,
+ opts:[`Define priority as an enum with the exact values the ticketing system accepts.`,
+       `Keep priority as a string and describe the accepted values in the tool description.`,
+       `Keep priority as a string and normalize unexpected values inside the ticketing system.`,
+       `Make priority optional so the ticketing system can apply its own default value.`],
+ ans:[0],
+ expl:`スキーマ設計の基本。取りうる値が有限ならスキーマ側で enum として制約するのが最も確実で、モデルの善意に依存しない。{{1}} は説明頼みで確率的、{{2}} は不正値を下流に押し付けるだけ、{{3}} は優先度そのものが失われる。`,
+ vocab:[["keep reaching ~ and failing validation","「~に届いては検証で落ちる」。keep -ing は再発している症状の描写"]]},
+
+{n:5, dom:"D2", skill:"App Design", multi:false,
+ stem:`Two teams share one Claude application. Team A needs the assistant to answer in formal Japanese; Team B needs concise English. Both currently edit the same system prompt, and each change breaks the other team. Which design best resolves the conflict?`,
+ opts:[`Keep shared rules in the system prompt and pass per-team output requirements as parameters.`,
+       `Maintain two forks of the application so each team can edit its own system prompt freely.`,
+       `Let the model infer the required language and tone from the wording of each user request.`,
+       `Put both sets of formatting rules in the system prompt and let the model pick one.`],
+ ans:[0],
+ expl:`不変のルール(共有)と可変の要件(チーム固有)を分離するのが設計の定石。共通部分を system に残し、差分はパラメータ化する。{{1}} は保守対象が倍になる、{{2}} は保証がない、{{3}} は矛盾する指示を並べるだけで挙動が不安定になる。`,
+ vocab:[["breaks the other team","「もう一方のチームの動作を壊す」。break は仕様が壊れることを指す口語的な技術表現"]]},
+
+{n:6, dom:"D2", skill:"App Design", multi:false,
+ stem:`An internal assistant is distributed as a Claude Code plugin. After a plugin update, some developers get new behavior and others do not, and nobody can tell which version they are running. Which practice most directly addresses this?`,
+ opts:[`Pin the plugin version and its dependencies so every install resolves identically.`,
+       `Ask developers to reinstall the plugin whenever they notice unexpected assistant behavior.`,
+       `Publish a changelog in the repository so developers can compare behavior against releases.`,
+       `Move the plugin logic into each developer's personal configuration directory instead.`],
+ ans:[0],
+ expl:`構成管理の話で、バージョンと依存関係を明示的に宣言・固定するのが直接の解。{{1}} は場当たり的、{{2}} は情報提供にすぎず解決しない、{{3}} は共有をやめる方向で悪化する。`,
+ vocab:[["nobody can tell which version they are running","「どのバージョンで動いているか誰も分からない」。可観測性の欠如を示す典型表現"]]},
+
+{n:7, dom:"D2", skill:"App Design", multi:true,
+ stem:`A product team must expose the same Claude-backed summarizer in a web app, a CLI, and a nightly job. They want one place to change the summarization rules. Which structure best fits? (Select TWO.)`,
+ opts:[`Keep the prompt and schema in a shared library that all three entry points call.`,
+       `Version the shared prompt alongside the code so changes are reviewable and revertable.`,
+       `Copy the prompt into each entry point and keep the copies in sync during code review.`,
+       `Let each entry point define its own prompt so it can be tuned to that surface.`],
+ ans:[0,1],
+ expl:`共通ロジックの単一情報源(single source of truth)化と、プロンプトのバージョン管理の組み合わせが正解。{{2}} はコピーの同期を人手に頼るため必ずずれる。{{3}} は「1箇所で変えたい」という要件に真っ向から反する。`,
+ vocab:[["one place to change ~","「~を変更する場所を1つに」。single source of truth を平易に言い換えた条件文"],
+        ["Select TWO.","「2つ選べ」。本試験は選択数を必ず明記するので、指示文を読み飛ばさないこと"]]},
+
+{n:8, dom:"D2", skill:"App Design", multi:false,
+ stem:`An application sends a system prompt of roughly 200 words and, in the same request, a 40-page contract plus a one-line question. Answers are often correct about the beginning of the contract and vague about clauses in the middle. Which adjustment is most likely to help?`,
+ opts:[`Put a short structured outline first and label each clause section explicitly in the input.`,
+       `Move the one-line question to the very beginning of the request, before the contract.`,
+       `Split the contract into 40 separate requests and send one page per request.`,
+       `Increase max_tokens so the model has more room to discuss the middle sections.`],
+ ans:[0],
+ expl:`長い入力の中間が抜け落ちる lost in the middle 現象。見出しや要約で構造を与え、参照すべき場所を明示するのが有効。{{1}} は場所の問題を解決せず、{{2}} は条項間の関係が失われる、{{3}} は出力枠の話で入力側の欠落には無関係。`,
+ vocab:[["vague about clauses in the middle","「中間の条項について曖昧」。vague about ~ は品質劣化の位置を特定する表現"]]},
+
+{n:9, dom:"D2", skill:"App Design", multi:false,
+ stem:`A team is deciding where to put a rule that the assistant must never quote customer email addresses in its answers. The rule applies to every request in the application. Where does it belong?`,
+ opts:[`In the system prompt, stated as a standing constraint for every request.`,
+       `In each user message, restated as part of the task description.`,
+       `In the tool descriptions for any tool that returns customer records.`,
+       `In a post-processing step that rewrites answers containing email addresses.`],
+ ans:[0],
+ expl:`system = 役割・不変ルール・出力形式、user = 個別タスクとデータ、という役割分担が問われている。全リクエストに適用される制約は system に置く。{{1}} は毎回書く手間と抜けのリスク、{{2}} はツール利用時しか効かない、{{3}} は有効な多層防御の一部だが「どこに置くか」という設問への答えではない。`,
+ vocab:[["standing constraint","「常時有効な制約」。standing は「恒常的な」の意で、可変のタスク指示と対比される"]]},
+
+/* ===== D2 · Software Engineering Foundations (7) ===== */
+{n:10, dom:"D2", skill:"SWE Foundations", multi:false,
+ stem:`A service calls the Messages API and, on network timeout, retries the same request. Occasionally a user is charged twice because the downstream billing tool ran on both attempts. Which change best prevents duplicate side effects?`,
+ opts:[`Give each billing operation an idempotency key so repeated attempts collapse into one.`,
+       `Increase the client timeout so that slow responses are less likely to trigger a retry.`,
+       `Retry only once instead of using exponential backoff with several attempts.`,
+       `Log every retry so duplicate charges can be found and reversed after the fact.`],
+ ans:[0],
+ expl:`リトライがある限り重複実行は起こりうるので、副作用側を冪等(idempotent)にするのが正攻法。{{1}}・{{2}} は発生確率を下げるだけで保証にならず、{{3}} は事後対応で予防になっていない。`,
+ vocab:[["duplicate side effects","「副作用の重複」。side effect は外部状態を変える処理を指す一般的な語"],
+        ["after the fact","「事後に」。予防策と対比して事後対応であることを示す"]]},
+
+{n:11, dom:"D2", skill:"SWE Foundations", multi:false,
+ stem:`A REST endpoint wraps a Claude call that takes 30 to 90 seconds. Mobile clients time out, and the load balancer closes idle connections. Which design best fits without changing the model or prompt?`,
+ opts:[`Accept the job, return an identifier immediately, and let clients poll or receive a callback.`,
+       `Raise the load balancer idle timeout and the mobile client timeout to five minutes.`,
+       `Split the request into three shorter calls issued sequentially from the mobile client.`,
+       `Cache the most recent response so repeated requests from the same client return faster.`],
+ ans:[0],
+ expl:`長時間処理は同期リクエストの中に閉じ込めず、非同期の受付+ポーリング/コールバックに切り出すのが基本。{{1}} はタイムアウトを伸ばすだけで根本解決にならずリソースも占有する。{{2}} は分割の根拠がなく合計時間も変わらない。{{3}} は初回に効かない。`,
+ vocab:[["without changing the model or prompt","「モデルもプロンプトも変えずに」。解を統合レイヤ側に限定する制約節"]]},
+
+{n:12, dom:"D2", skill:"SWE Foundations", multi:false,
+ stem:`A pull request adds a Claude-powered feature. The reviewer sees prompt text, retry logic, JSON parsing, and business rules all inside one 400-line function. What is the most useful review outcome?`,
+ opts:[`Ask for the prompt, transport, parsing, and business rules to be separated into distinct units.`,
+       `Ask for inline comments that explain each section of the function to future readers.`,
+       `Ask for the function to be split into four files without changing any of the logic.`,
+       `Approve it and open a follow-up ticket to revisit the structure after the release.`],
+ ans:[0],
+ expl:`関心の分離(separation of concerns)ができていないのが本質。責務ごとに単位を分ければ個別にテスト・差し替えができる。{{1}} はコメントで構造の問題を覆うだけ、{{2}} はファイルを分けても責務が混ざったままなら意味がない、{{3}} は負債の先送り。`,
+ vocab:[["the most useful review outcome","「最も有益なレビュー結果」。コードレビューで何を指摘すべきかを問う定型"]]},
+
+{n:13, dom:"D2", skill:"SWE Foundations", multi:false,
+ stem:`A team must refactor a 5,000-line module that has no tests, while feature work continues on the same branch daily. Which sequence is most appropriate?`,
+ opts:[`Add characterization tests for current behavior, then refactor in small reviewable increments.`,
+       `Refactor the whole module in one branch, then write tests against the new structure.`,
+       `Freeze feature work until the refactor is complete, then resume with the new structure.`,
+       `Rewrite the module from the specification and swap it in once it passes review.`],
+ ans:[0],
+ expl:`テストのないコードの大規模リファクタは、まず現在の挙動を固定するテスト(characterization test)を書き、小さく刻んで進めるのが定石。{{1}} はテストなしで壊れても気付けない、{{2}} は現実的でなく統合コストが爆発する、{{3}} は仕様に現れない実挙動を落とす。`,
+ vocab:[["characterization tests","「現状の挙動を写し取るテスト」。リファクタ前に既存挙動を固定する手法名"],
+        ["in small reviewable increments","「レビュー可能な小さい単位で」。increment は差分の単位"]]},
+
+{n:14, dom:"D2", skill:"SWE Foundations", multi:true,
+ stem:`An async worker fires 500 concurrent Messages API calls in a loop. The provider returns rate limit errors, and the worker retries all failures immediately, which produces more errors. Which fix best stabilizes throughput? (Select TWO.)`,
+ opts:[`Limit in-flight requests with a bounded concurrency pool sized to the rate limit.`,
+       `Retry rate limit errors with exponential backoff and jitter instead of immediately.`,
+       `Catch rate limit errors and drop the affected items so the queue keeps moving.`,
+       `Move all 500 calls into a single request so only one rate limit check applies.`],
+ ans:[0,1],
+ expl:`同時実行数の上限管理と、指数バックオフ+ジッターによるリトライの組み合わせが標準解。{{2}} はデータを失う、{{3}} は Messages API のリクエスト構造上そもそも不可能。`,
+ vocab:[["in-flight requests","「実行中のリクエスト」。同時実行数の管理を語るときの定番語"],
+        ["backoff and jitter","「バックオフとジッター(ゆらぎ)」。同時再送の波を崩す標準手法"]]},
+
+{n:15, dom:"D2", skill:"SWE Foundations", multi:false,
+ stem:`A response body is documented as JSON, but a downstream parser intermittently fails on values like 1.0000000000000002 and on fields that are sometimes absent. Which handling approach is most robust?`,
+ opts:[`Parse into an explicit schema with typed fields and defined behavior for missing values.`,
+       `Use a regular expression to pull out the fields the application actually needs.`,
+       `Compare the raw response text against the last known good response before parsing.`,
+       `Round all numeric values to two decimals immediately after reading the response.`],
+ ans:[0],
+ expl:`JSON の取り扱いは、明示的なスキーマに型と欠損時の挙動を定義してパースするのが堅い。{{1}} は構造を無視した脆いパース、{{2}} は運用不能、{{3}} は精度の問題を隠すだけで欠損フィールドには無力。`,
+ vocab:[["intermittently fails","「断続的に失敗する」。intermittent は再現性が低い障害を指す頻出語"]]},
+
+{n:16, dom:"D2", skill:"SWE Foundations", multi:false,
+ stem:`A prompt change is merged to the main branch and quality drops in production the same day. The team wants to restore service quickly and understand what happened. Which practice makes both possible?`,
+ opts:[`Keep prompts in version control so the change can be reverted and diffed like code.`,
+       `Keep prompts in a database so they can be edited without redeploying the service.`,
+       `Keep prompts in an environment variable so operators can change them at runtime.`,
+       `Keep prompts in the ticket that requested the change so the intent stays visible.`],
+ ans:[0],
+ expl:`prompt versioning の設問。コードと同じくバージョン管理下に置けば revert と diff の両方ができ、復旧と原因究明が同時に成立する。{{1}}・{{2}} は素早く変えられるが履歴と差分が残らず、原因究明ができない。{{3}} は記録であって復旧手段ではない。`,
+ vocab:[["restore service quickly and understand what happened","「早く復旧し、かつ何が起きたか理解する」。2つの要求を同時に満たす選択肢を探させる"]]},
+
+/* ===== D2 · Claude API Mechanics (7) ===== */
+{n:17, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`An agent loop sends a request and receives a response whose stop_reason is tool_use. What must the application do before sending the next request?`,
+ opts:[`Append the assistant message, then send tool results in a user message with matching ids.`,
+       `Append the assistant message, then send tool results in a new assistant message.`,
+       `Replace the assistant message with the tool results to keep the history compact.`,
+       `Send the tool results as a system message so they are treated as trusted context.`],
+ ans:[0],
+ expl:`ツール実行の往復は、tool_use ブロックを含む assistant 応答を履歴に追加し、その後 tool_result を user メッセージとして返す。tool_use_id は対応する tool_use の id と一致させる。{{1}}・{{2}}・{{3}} はいずれも API の想定する会話構造から外れる。`,
+ vocab:[["matching ids","「対応する id」。tool_use_id と tool_use の id の一致を指す"]]},
+
+{n:18, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`A batch job for 30,000 documents is submitted successfully. An engineer asks when the results will be available and whether ordering is guaranteed. Which statement is accurate?`,
+ opts:[`Results arrive within 24 hours in no guaranteed order and are matched by custom_id.`,
+       `Results arrive within 24 hours in submission order and are matched by array index.`,
+       `Results stream back as each request finishes and are matched by their arrival order.`,
+       `Results arrive within 24 hours and each one carries the index of its original request.`],
+ ans:[0],
+ expl:`Batch API は最大24時間以内・順不同で、custom_id による突き合わせが必須。位置やインデックスに依存する実装は壊れる。ストリーミングもバッチには存在しない。`,
+ vocab:[["in no guaranteed order","「順序の保証なしに」。Batch の最重要な制約表現"]]},
+
+{n:19, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`A code generation feature sets max_tokens to 8192. Users report that long files are cut off mid-function. Which response field confirms this diagnosis?`,
+ opts:[`stop_reason is max_tokens, indicating the response hit the configured output limit.`,
+       `stop_reason is end_turn, indicating the model finished before the output limit.`,
+       `stop_reason is stop_sequence, indicating a configured stop string was emitted.`,
+       `stop_reason is refusal, indicating the model declined to complete the output.`],
+ ans:[0],
+ expl:`切り捨ての診断は stop_reason=max_tokens で確定する。end_turn は自然終了、stop_sequence は停止文字列、refusal は安全上の拒否で、いずれも別の状態。`,
+ vocab:[["cut off mid-function","「関数の途中で切れる」。mid- は「~の途中で」を作る接頭辞"]]},
+
+{n:20, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`A chat UI must show text as it is produced, and some responses exceed 16,000 output tokens. Which API choice fits both requirements?`,
+ opts:[`Use streaming so partial content arrives incrementally and long responses avoid timeouts.`,
+       `Use the standard request and render the response once the full body has arrived.`,
+       `Use the Message Batches API and poll for the result while showing a progress bar.`,
+       `Use several smaller requests and concatenate the partial outputs in the client.`],
+ ans:[0],
+ expl:`リアルタイム表示と大きい max_tokens のタイムアウト回避、どちらもストリーミングが答え。{{1}} は表示要件を満たさない、{{2}} は対話 UI に不適、{{3}} は文脈が切れて品質が落ちる。`,
+ vocab:[["arrives incrementally","「少しずつ届く」。ストリーミングの説明で頻出"]]}
+,
+{n:21, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`A request includes tool definitions, a large system prompt, and a short user question, with cache_control set on the system block. Usage shows cache_creation_input_tokens on every call and cache_read_input_tokens of zero. Which change is most likely to produce cache hits?`,
+ opts:[`Keep the tool definitions byte-identical between requests so the cached prefix still matches.`,
+       `Move the cache_control marker from the system block onto the user message instead.`,
+       `Enable the one-hour cache TTL so entries survive longer between successive requests.`,
+       `Send the requests closer together so the five-minute window does not elapse.`],
+ ans:[0],
+ expl:`キャッシュはプレフィックス一致で、レンダリング順は tools → system → messages。system より前にある tools が変わると、その後ろのキャッシュはすべて無効になる。TTL や送信間隔は、そもそもプレフィックスが一致していない状況では関係がない。`,
+ vocab:[["byte-identical","「1バイトも違わない」。プレフィックス一致の厳密さを示す表現"]]},
+
+{n:22, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`An agent uses a server-side tool. One response comes back with stop_reason set to pause_turn instead of end_turn or tool_use. What should the application do?`,
+ opts:[`Send the conversation back unchanged so the model can continue the paused turn.`,
+       `Treat the turn as finished and return the partial content to the end user.`,
+       `Execute the pending tool call locally and return the result as a tool_result block.`,
+       `Restart the conversation from the original user request with a longer max_tokens.`],
+ ans:[0],
+ expl:`pause_turn はサーバー側ツールの実行が長引いてターンが中断された状態で、そのまま送り返せば再開される。ローカルで実行する必要はなく、打ち切りでも失敗でもない。`,
+ vocab:[["send the conversation back unchanged","「会話をそのまま送り返す」。unchanged が再開条件のポイント"]]},
+
+{n:23, dom:"D2", skill:"API Mechanics", multi:false,
+ stem:`An application must analyze a scanned invoice image together with a written instruction in one request. How should the request content be composed?`,
+ opts:[`Include an image block with the encoded image and place the instruction text after it.`,
+       `Include the image as a URL inside the text block so the model can fetch it directly.`,
+       `Describe the invoice in text and attach the image to the system prompt for reference.`,
+       `Send the image in one request and the instruction in a separate follow-up request.`],
+ ans:[0],
+ expl:`マルチフォーマット入力は content 配列に image ブロック(base64 または URL)を置き、テキストブロックはその後ろに置くのが基本形。{{1}} のようにテキスト中に URL を書いても画像としては扱われない。{{2}} は画像を使わない、{{3}} は文脈が分断される。`,
+ vocab:[["composed","「(リクエストが)構成される」。compose はブロックを組み立てるニュアンス"]]},
+
+/* ===== D2 · Configuration Management (4) ===== */
+{n:24, dom:"D2", skill:"Config Mgmt", multi:false,
+ stem:`A production service references a model alias that always points at the newest release. After an upgrade, output formatting changes and a downstream parser breaks. Which practice would have prevented the incident?`,
+ opts:[`Pin a specific model version in production and promote upgrades after evaluation.`,
+       `Add defensive parsing so the downstream component tolerates unexpected formatting.`,
+       `Subscribe to release announcements so the team can react to upgrades faster.`,
+       `Lower the temperature so that formatting varies less between successive releases.`],
+ ans:[0],
+ expl:`モデルバージョンのピン留めが直接の予防策。リリース間で挙動が変わりうる(breaking behavior changes)ため、本番は特定バージョンを固定し、eval を通してから上げる。{{1}} は被害を軽減するが自動アップグレード自体は止まらない、{{2}} は事後対応、{{3}} は無関係。`,
+ vocab:[["pin","「固定する」。バージョン管理の文脈で version pinning として頻出"]]},
+
+{n:25, dom:"D2", skill:"Config Mgmt", multi:false,
+ stem:`A repository contains a root CLAUDE.md with team conventions. A developer adds personal shortcuts to that file and commits them. Teammates start seeing unfamiliar instructions applied to their work. Where should the personal shortcuts live?`,
+ opts:[`In the developer's own user-level configuration, which is not shared through the repository.`,
+       `In a subdirectory CLAUDE.md so the shortcuts apply only to that part of the tree.`,
+       `In the root CLAUDE.md but marked with a comment identifying whose shortcuts they are.`,
+       `In a separate branch of the repository that only the developer keeps checked out.`],
+ ans:[0],
+ expl:`CLAUDE.md の階層とスコープの理解を問う設問。個人設定はユーザーレベル(バージョン管理外)に置く。{{1}} はディレクトリ配下の全員に効いてしまう、{{2}} は適用範囲を変えない、{{3}} は運用が破綻する。`,
+ vocab:[["not shared through the repository","「リポジトリ経由で共有されない」。user スコープの定義そのもの"]]},
+
+{n:26, dom:"D2", skill:"Config Mgmt", multi:false,
+ stem:`A team wants an MCP server configuration that every contributor gets automatically after cloning, with the access token supplied per developer and never committed. Which configuration approach fits?`,
+ opts:[`Commit the project-scoped config and reference the token through environment variable expansion.`,
+       `Commit the project-scoped config with a placeholder token that each developer edits locally.`,
+       `Ask each developer to add the server to their personal configuration with their own token.`,
+       `Commit the project-scoped config and distribute a shared token through the team chat.`],
+ ans:[0],
+ expl:`プロジェクトスコープの設定をコミットして共有しつつ、認証情報は環境変数展開で外出しするのが定石。{{1}} は毎回ローカル編集の差分がノイズになり誤コミットも起きる、{{2}} は自動で配られない、{{3}} は秘密情報の共有チャネルとして不適。`,
+ vocab:[["never committed","「決してコミットしない」。秘密情報の扱いを規定する制約節"]]},
+
+{n:27, dom:"D2", skill:"Config Mgmt", multi:false,
+ stem:`An evaluation suite passes on a developer machine but fails in CI with different assistant behavior. Both run the same code and the same model version. Which difference is the most likely cause?`,
+ opts:[`Configuration files loaded on the developer machine are absent in the CI environment.`,
+       `The CI machine has fewer CPU cores, so responses are generated with less computation.`,
+       `The CI environment uses a different random seed for the model's sampling process.`,
+       `The evaluation suite runs the test cases in a different order inside CI.`],
+ ans:[0],
+ expl:`同じコード・同じモデルなら、差分は環境が読み込む設定にある可能性が高い。ローカルのユーザーレベル設定や CLAUDE.md が CI には存在しない、が典型。{{1}} は生成品質に影響しない、{{2}} はクライアント側が制御するものではない、{{3}} は独立したテストなら通常影響しない。`,
+ vocab:[["absent in the CI environment","「CI 環境には存在しない」。環境差分を指摘する定型"]]},
+
+/* ===== D2 · Understanding Requirements (3) ===== */
+{n:28, dom:"D2", skill:"Requirements", multi:false,
+ stem:`A business sponsor asks for an assistant that "handles customer refunds automatically." Before designing, which clarification is most important to obtain first?`,
+ opts:[`Which refund decisions may be issued without human approval, and under what limits.`,
+       `Which model tier the assistant should use to keep the response time acceptable.`,
+       `Whether the assistant should reply in a formal or a conversational tone to customers.`,
+       `Which logging system the team will use to store the assistant's refund decisions.`],
+ ans:[0],
+ expl:`要件定義では、まず自律判断が許される範囲と限度(承認境界)を確定させる。ここが決まらないとアーキテクチャもガードレールも決まらない。{{1}}・{{2}}・{{3}} は重要だが、権限境界が決まった後の設計判断。`,
+ vocab:[["under what limits","「どのような制限のもとで」。承認境界を問う定型"]]},
+
+{n:29, dom:"D2", skill:"Requirements", multi:false,
+ stem:`Stakeholders state that the assistant "must be fast" for an internal research tool used a few times per day by analysts. Which follow-up best converts this into a usable requirement?`,
+ opts:[`Ask for a target response time and what analysts do while they wait for results.`,
+       `Ask whether the fastest available model tier is acceptable for the research tool.`,
+       `Ask whether responses should stream so users see output while it is generated.`,
+       `Ask what the monthly budget is so the team can size the infrastructure correctly.`],
+ ans:[0],
+ expl:`「速く」という定性要求は、目標値と利用文脈に翻訳して初めて設計判断に使える。{{1}}・{{2}} は先に解を決めてしまっている、{{3}} は別軸の話。`,
+ vocab:[["converts this into a usable requirement","「使える要件に変換する」。曖昧な要望を測定可能にする作業を指す"]]},
+
+{n:30, dom:"D2", skill:"Requirements", multi:false,
+ stem:`A regulated insurer wants Claude to draft policy documents. Legal states that every generated clause must be traceable to an approved source clause. Which requirement does this impose on the solution architecture?`,
+ opts:[`Generated clauses must carry references to the retrieved source passages that produced them.`,
+       `Generated clauses must be reviewed by a second model before they are shown to users.`,
+       `Generated clauses must be produced with a low temperature to reduce variation in wording.`,
+       `Generated clauses must be stored for seven years to satisfy the retention policy.`],
+ ans:[0],
+ expl:`「承認済みの原文まで辿れること」はトレーサビリティ要件で、出力に出典参照を持たせる設計を要求する。{{1}} は品質施策だが追跡可能性を与えない、{{2}} は表現のブレの話、{{3}} は保管要件で別物。`,
+ vocab:[["traceable to","「~まで辿れる」。監査・規制文脈のキーワード"]]},
+
+/* ===== D2 · Systems Life Cycle (3) ===== */
+{n:31, dom:"D2", skill:"Life Cycle", multi:false,
+ stem:`A Claude feature is ready to ship but the team is unsure how it will behave on real traffic. Which rollout approach best limits blast radius while producing usable evidence?`,
+ opts:[`Release to a small traffic share first and compare its metrics against the existing path.`,
+       `Release to all users and keep an engineer on call to roll back if complaints arrive.`,
+       `Release to an internal team only and expand once they have used it for a quarter.`,
+       `Release behind a flag that stays off until the next scheduled maintenance window.`],
+ ans:[0],
+ expl:`段階的リリース(カナリア)+既存経路との比較が、リスクを抑えつつ実データの証拠を得る標準手法。{{1}} は影響範囲が最大、{{2}} は安全だが実トラフィックの証拠が得られず遅い、{{3}} は情報が何も得られない。`,
+ vocab:[["blast radius","「影響範囲」。障害が波及する範囲を指す運用用語"]]},
+
+{n:32, dom:"D2", skill:"Life Cycle", multi:false,
+ stem:`Six months after launch, an assistant's answer quality has drifted downward, though no code or prompt changed. Which operational practice would have surfaced this earliest?`,
+ opts:[`Continuous monitoring of quality metrics on production traffic with alerting on regressions.`,
+       `A quarterly manual review in which the team reads a sample of recent conversations.`,
+       `An annual re-run of the original acceptance test suite against the current deployment.`,
+       `A feedback form that lets users report answers they consider unsatisfactory.`],
+ ans:[0],
+ expl:`運用フェーズの品質劣化は、本番トラフィック上の継続的な監視とアラートで最も早く検知できる。{{1}}・{{2}} は検知が遅く、{{3}} は受動的で報告バイアスがある。`,
+ vocab:[["surfaced this earliest","「これを最も早く表面化させた」。surface は「明るみに出す」の動詞用法"]]},
+
+{n:33, dom:"D2", skill:"Life Cycle", multi:false,
+ stem:`A prototype built in a notebook is being promoted to a maintained production service. Which change is most important to make during that transition?`,
+ opts:[`Move credentials, model version, and prompts into managed configuration outside the code.`,
+       `Rewrite the notebook cells as functions while keeping the same execution order.`,
+       `Replace the notebook's synchronous calls with asynchronous calls for higher throughput.`,
+       `Add type annotations throughout so the service is easier for new contributors to read.`],
+ ans:[0],
+ expl:`プロトタイプから本番への移行で最重要なのは、環境依存の値(認証情報・モデルバージョン・プロンプト)をコード外の管理下に出すこと。{{1}}・{{2}}・{{3}} はいずれも有益だが、運用可能性を決定づけるのは構成管理。`,
+ vocab:[["promoted to","「~に昇格する」。環境間の移行(dev→prod)を指す定番動詞"]]},
+
+/* ===== D5 · Technical Fundamentals (6) ===== */
+{n:34, dom:"D5", skill:"Tech Fundamentals", multi:false,
+ stem:`A team debates whether to call the REST endpoint directly or to use the official client SDK. Which statement most accurately describes the tradeoff?`,
+ opts:[`The SDK wraps the same REST endpoint and adds typed models, retries, and streaming helpers.`,
+       `The SDK uses a private protocol that is faster than the publicly documented REST endpoint.`,
+       `The SDK is required for streaming, which cannot be consumed through the REST endpoint.`,
+       `The SDK sends requests to a different service tier with higher rate limits than REST.`],
+ ans:[0],
+ expl:`SDK は REST をラップした薄い層で、型・リトライ・ストリーミング補助などの利便性を足すもの。別プロトコルでも別ティアでもなく、ストリーミング自体は REST でも SSE として扱える。`,
+ vocab:[["wraps","「ラップする・包む」。SDK と REST の関係を説明する標準語"]]},
+
+{n:35, dom:"D5", skill:"Tech Fundamentals", multi:false,
+ stem:`A dashboard needs the server to push updates to browsers whenever a background analysis finishes. Analyses complete at unpredictable times. Which transport fits best?`,
+ opts:[`A persistent connection such as a websocket, which lets the server push events as they occur.`,
+       `Short polling from the browser every second so results appear as soon as they are ready.`,
+       `A long-lived streaming response from the model, held open until every analysis finishes.`,
+       `A scheduled page refresh so the browser reloads the latest results at fixed intervals.`],
+ ans:[0],
+ expl:`サーバー起点の不定期な通知は、websocket のような持続接続でプッシュするのが素直。{{1}} は無駄なリクエストが多い、{{2}} はモデルのストリームを別用途に流用しており不適切、{{3}} はリアルタイム性がない。`,
+ vocab:[["push events as they occur","「発生したそばからイベントを送る」。サーバープッシュの説明句"]]},
+
+{n:36, dom:"D5", skill:"Tech Fundamentals", multi:false,
+ stem:`An SDK call raises an error with a 429 status. The application currently treats every exception the same way and shows a generic failure message. Which handling is most appropriate for this specific error?`,
+ opts:[`Retry after a delay that grows with each attempt, since the condition is temporary.`,
+       `Fail immediately and ask the user to correct the request before trying again.`,
+       `Fall back to a smaller model so the request can be completed without waiting.`,
+       `Log the error and continue without a response, since the request cannot succeed.`],
+ ans:[0],
+ expl:`429 はレート制限で transient(一時的)なエラー。バックオフを伴うリトライが正しい回復戦略。{{1}} は validation エラーへの対応、{{2}} は制限の原因に触れておらず同じ制限に当たりうる、{{3}} は結果を捨てている。`,
+ vocab:[["the condition is temporary","「その状態は一時的」。transient エラーの言い換え"]]},
+
+{n:37, dom:"D5", skill:"Tech Fundamentals", multi:false,
+ stem:`A Python service must issue many independent Claude calls inside a request handler without blocking the event loop. Which implementation is most appropriate?`,
+ opts:[`Use the async client and await the calls concurrently with a gathering primitive.`,
+       `Use the synchronous client inside a loop and rely on the SDK's internal buffering.`,
+       `Use the synchronous client and spawn one operating system process per call.`,
+       `Use the async client but await each call in sequence to keep ordering predictable.`],
+ ans:[0],
+ expl:`非同期クライアントで並行に await するのが標準。{{1}} は逐次実行でイベントループも塞ぐ、{{2}} はプロセス生成のコストが過大、{{3}} は非同期を使っていても逐次なので目的を果たさない。`,
+ vocab:[["without blocking the event loop","「イベントループを塞がずに」。非同期プログラミングの制約を示す定型"]]},
+
+{n:38, dom:"D5", skill:"Tech Fundamentals", multi:false,
+ stem:`A streaming integration renders text as it arrives but never learns why generation stopped. Which event carries that information?`,
+ opts:[`message_delta, which reports the stop reason and final usage for the message.`,
+       `content_block_delta, which reports the stop reason alongside each emitted text fragment.`,
+       `message_start, which declares the stop reason that the request was configured with.`,
+       `content_block_stop, which reports the stop reason for the block that just completed.`],
+ ans:[0],
+ expl:`SSE の順序は message_start → content_block_start → content_block_delta → content_block_stop → message_delta → message_stop で、stop_reason と usage は message_delta に載る。他のイベントは本文やブロック境界の通知。`,
+ vocab:[["carries that information","「その情報を運ぶ」。どのイベント/フィールドに載るかを問う言い方"]]},
+
+{n:39, dom:"D5", skill:"Tech Fundamentals", multi:false,
+ stem:`An integration must call Claude through a third-party cloud vendor instead of the direct API, because procurement requires it. What is the most accurate expectation to set with the team?`,
+ opts:[`The message structure is largely the same, but authentication, endpoints, and model names differ.`,
+       `The message structure differs completely, so prompts must be rewritten for the vendor.`,
+       `The vendor exposes the same endpoints and credentials, so no integration change is needed.`,
+       `The vendor only supports synchronous requests, so streaming code must be removed.`],
+ ans:[0],
+ expl:`サードパーティ経由でも Messages の構造はおおむね共通で、変わるのは認証方式・エンドポイント・モデル識別子。プロンプトの全面書き換えは不要で、認証まわりは必ず変わる。`,
+ vocab:[["set expectations with the team","「チームと認識を合わせる」。expectation を「見込み・前提」の意で使う"]]},
+
+/* ===== D5 · LLM Fundamentals (5) ===== */
+{n:40, dom:"D5", skill:"LLM Fundamentals", multi:false,
+ stem:`A regression test asserts that a given prompt returns byte-identical output on every run. It passes locally but fails occasionally in CI, with no configuration difference. What is the most reasonable conclusion?`,
+ opts:[`Generation is not deterministic, so the test should assert properties rather than exact text.`,
+       `The CI environment must be misconfigured, since identical inputs produce identical outputs.`,
+       `The test should be retried until it passes, since occasional failures are acceptable noise.`,
+       `The prompt is too long, and shortening it will make the output stable across runs.`],
+ ans:[0],
+ expl:`LLM の出力は非決定的で、完全一致を前提にしたテストは本質的に壊れている。検証すべきは形式や必須要素などの性質。{{1}} は誤った前提、{{2}} はテストの信頼性を捨てている、{{3}} は長さの問題ではない。`,
+ vocab:[["byte-identical output","「1バイトも違わない出力」。完全一致を要求するテストの表現"],
+        ["assert properties rather than exact text","「厳密な文字列でなく性質を検証する」。LLM テストの基本方針"]]},
+{n:41, dom:"D5", skill:"LLM Fundamentals", multi:false,
+ stem:`A summarization request sends a 180,000-token transcript and sets max_tokens to 8,000, but the call is rejected before any output is generated. Which explanation fits?`,
+ opts:[`Input and output share the context window, so their sum exceeded the model's limit.`,
+       `The output limit is checked first, so max_tokens must be lower than the input length.`,
+       `Transcripts must be chunked because the API rejects any single text block over 100,000 tokens.`,
+       `The request was rejected for cost reasons because the estimated charge exceeded a threshold.`],
+ ans:[0],
+ expl:`コンテキストウィンドウは入力+出力の合計上限。入力が大きいまま出力枠を確保しようとして上限を超えたのが原因。{{1}} は逆の説明、{{2}} はそのような一律のブロック上限はない、{{3}} は API の拒否理由ではない。`,
+ vocab:[["share the context window","「コンテキストウィンドウを共有する」。入出力が同じ枠を食い合うことの説明"]]},
+
+{n:42, dom:"D5", skill:"LLM Fundamentals", multi:false,
+ stem:`A classifier prompt describes six categories in prose. Output labels are inconsistent: sometimes lowercase, sometimes a full sentence. Which prompting change most reliably fixes the format?`,
+ opts:[`Add several input and output examples that show the exact label format expected.`,
+       `Restate the category list in the prompt a second time to reinforce the instruction.`,
+       `Ask the model to explain its reasoning before it emits the final category label.`,
+       `Move the category descriptions from the system prompt into each user message.`],
+ ans:[0],
+ expl:`形式の一貫性には multi-shot(複数例)が最も効く。散文の説明を繰り返しても形式は安定しない。{{2}} は推論を促すが形式の統一には直結せず、{{3}} は配置の問題ではない。`,
+ vocab:[["most reliably fixes the format","「最も確実に形式を直す」。reliably は「安定して」で、確率的な手段との差を示す"]]},
+
+{n:43, dom:"D5", skill:"LLM Fundamentals", multi:false,
+ stem:`A team must choose between zero-shot and multi-shot prompting for extracting fields from contracts that contain many ambiguous edge cases. Which consideration should drive the decision?`,
+ opts:[`Examples covering the ambiguous cases teach the handling rule that prose alone conveys poorly.`,
+       `Examples increase input length, so zero-shot should be preferred whenever cost matters.`,
+       `Examples only help with formatting, so ambiguity must be handled by a larger model.`,
+       `Examples cause the model to copy their content, so they should be avoided in extraction.`],
+ ans:[0],
+ expl:`曖昧ケースの扱いを伝えるには few-shot が最有力。例に選択理由を添えると新規パターンにも汎化する。{{1}} はコストだけで品質要件を無視、{{2}}・{{3}} は few-shot の効果に関する誤解。`,
+ vocab:[["prose alone conveys poorly","「散文だけではうまく伝わらない」。例示が必要な理由を述べる定型"]]},
+
+{n:44, dom:"D5", skill:"LLM Fundamentals", multi:false,
+ stem:`An application processes short, well-defined classification requests and needs the lowest possible response time. Which model option setting best matches the workload?`,
+ opts:[`Disable extended thinking and keep the effort level low so responses are produced quickly.`,
+       `Enable extended thinking with a high effort level so classifications are more accurate.`,
+       `Enable adaptive thinking so the model decides how much reasoning each request needs.`,
+       `Keep extended thinking off but raise max_tokens so the model has room to be thorough.`],
+ ans:[0],
+ expl:`単純で定義の明確なタスクは thinking なし・effort 低で高速・低コストに回すのが定石。{{1}} は不要な推論でレイテンシとコストが増える、{{2}} は判断のオーバーヘッドが残る、{{3}} は出力枠を増やしても速くならない。`,
+ vocab:[["the lowest possible response time","「可能な限り低い応答時間」。レイテンシ最優先を宣言する定型"]]},
+
+/* ===== D5 · Cost and Token Management (3) ===== */
+{n:45, dom:"D5", skill:"Cost & Tokens", multi:true,
+ stem:`A support assistant sends the same 20,000-token policy manual with every request and answers thousands of short questions per day. Costs are too high. Which changes reduce cost most directly? (Select TWO.)`,
+ opts:[`Mark the policy manual as cacheable so repeated requests read it at a reduced rate.`,
+       `Keep the manual at the start and the variable question at the end.`,
+       `Lower max_tokens so that each generated answer consumes fewer output tokens per request.`,
+       `Send the manual only with the first request of each conversation and omit it later.`],
+ ans:[0,1],
+ expl:`プロンプトキャッシュを効かせるには、キャッシュ対象を先頭に、変動部分を末尾に置く必要があるので、この2つはセットで機能する。{{2}} は入力側の支配的なコストにほとんど効かない。{{3}} は API がステートレスなので、省略すると後続ターンでマニュアルを参照できなくなる。`,
+ vocab:[["at a reduced rate","「割引された単価で」。キャッシュ読み取りの課金を表す"]]},
+
+{n:46, dom:"D5", skill:"Cost & Tokens", multi:false,
+ stem:`A finance team asks for a cost estimate before a large migration job is run. No requests have been sent yet. What is the most accurate way to produce the estimate?`,
+ opts:[`Count tokens for representative inputs with the token counting endpoint and scale the result.`,
+       `Run the full job once and read the usage totals reported on the resulting responses.`,
+       `Divide the total character count of the corpus by four and treat that as the token count.`,
+       `Use the previous month's invoice and scale it by the ratio of document counts.`],
+ ans:[0],
+ expl:`事前見積もりは count_tokens で代表サンプルを計測し、件数で外挿するのが最も正確。{{1}} は見積もりではなく実行、{{2}} は英語の粗い目安にすぎず言語や構造で大きくずれる、{{3}} は前提が違えば当たらない。`,
+ vocab:[["representative inputs","「代表的な入力」。サンプリングして外挿する見積もり手法の前提"]]},
+
+{n:47, dom:"D5", skill:"Cost & Tokens", multi:false,
+ stem:`An agent's cost per session has tripled after a new search tool was added. Traces show the tool returns 40 fields per result and all of them are appended to the conversation. Which change reduces cost with the least quality risk?`,
+ opts:[`Return only the fields the agent actually uses, and drop the rest before appending results.`,
+       `Truncate every tool result to a fixed character limit before appending it to the history.`,
+       `Switch the agent to a cheaper model tier so the accumulated context costs less per token.`,
+       `Reduce the number of search results the tool returns from ten down to three per call.`],
+ ans:[0],
+ expl:`ツール出力の刈り込み(pruning)は、必要な情報を保ったままコンテキストの膨張を止める。{{1}} は必要な情報も切り落とす、{{2}} は品質を犠牲にする、{{3}} は再現率が落ちて回答品質に響く。`,
+ vocab:[["with the least quality risk","「品質リスクが最も小さい形で」。複数の有効策から副作用の小さいものを選ばせる"]]},
+
+/* ===== D5 · Model Selection and Tradeoffs (3) ===== */
+{n:48, dom:"D5", skill:"Model Selection", multi:false,
+ stem:`A pipeline has three stages: routing incoming tickets, drafting replies, and auditing a legally sensitive subset. The team wants sensible cost and quality across all three. Which assignment fits best?`,
+ opts:[`A fast tier for routing, a balanced tier for drafting, and the strongest tier for the audit.`,
+       `The strongest tier for all three stages so quality is consistent across the pipeline.`,
+       `A fast tier for all three stages, with human review added at the end of the pipeline.`,
+       `A balanced tier for routing and drafting, and a fast tier for the audit to control cost.`],
+ ans:[0],
+ expl:`工程ごとに品質・レイテンシ・コストの要求が違うので、ティアを使い分けるのが正解。{{1}} は routing に過剰投資、{{2}} は法的に敏感な監査を最弱ティアに任せている、{{3}} は最も品質が要る監査を最速最安に割り当てており逆。`,
+ vocab:[["fits best","「最も適合する」。複数の割り当て案から要求に合うものを選ばせる定型"]]},
+
+{n:49, dom:"D5", skill:"Model Selection", multi:false,
+ stem:`After a model upgrade, an agent that previously called tools in a fixed order now sometimes reorders them, and a downstream report breaks. Which conclusion is best supported?`,
+ opts:[`Behavior can change between releases, so ordering must be enforced outside the model.`,
+       `The upgrade was faulty, so the team should stay on the previous version indefinitely.`,
+       `The agent's prompt became too short for the new model and should be expanded.`,
+       `Tool ordering is deterministic, so the downstream report must contain the defect.`],
+ ans:[0],
+ expl:`リリース間の挙動変化(breaking behavior changes)は起こりうる、というのがモデル選択の前提知識。順序保証が業務要件ならワークフローやフックでプログラム的に強制する。{{1}} は永久に固定するのは現実的でない、{{2}}・{{3}} は誤った前提。`,
+ vocab:[["best supported","「最も裏付けられる」。与えられた事実から導ける結論を選ばせる言い方"]]},
+
+{n:50, dom:"D5", skill:"Model Selection", multi:false,
+ stem:`An interactive coding assistant must plan a multi-file change, and users tolerate a short wait for the plan. Which selection best matches the requirement?`,
+ opts:[`A high-capability tier with thinking enabled, since planning quality dominates here.`,
+       `The fastest tier with thinking disabled, since users are waiting for a response.`,
+       `A high-capability tier with thinking disabled, to balance quality against latency.`,
+       `The fastest tier with a high effort level, to get reasoning without the extra cost.`],
+ ans:[0],
+ expl:`「多ファイルの計画」は複雑な推論が必要で、かつ待ち時間が許容されている。高性能ティア+thinking が要求に一致する。{{1}} は品質要件を無視、{{2}} は計画タスクで thinking を切る合理性がない、{{3}} は最速ティアに高 effort を組み合わせても要求水準の推論には届きにくい。`,
+ vocab:[["users tolerate a short wait","「短い待ち時間なら許容される」。レイテンシ制約が緩いことを示す条件節"]]},
+
+/* ===== D1 · Agent Architecture (5) ===== */
+{n:51, dom:"D1", skill:"Agent Architecture", multi:false,
+ stem:`An operations team automates a nightly process with exactly five known steps that always run in the same order. Which implementation is most appropriate?`,
+ opts:[`A workflow in which code controls the order and the model performs each step's task.`,
+       `An agent that receives the goal and decides which of the five steps to run each night.`,
+       `An agent with the five steps described in its system prompt and a step counter tool.`,
+       `A workflow that calls an agent for each step so failures can be retried independently.`],
+ ans:[0],
+ expl:`手順が既知で固定ならワークフロー。制御フローをコードが持つ方が予測可能でデバッグしやすく、コストも低い。{{1}}・{{2}} はモデルに不要な裁量を与えて非決定性を持ち込む、{{3}} は各ステップにエージェントを置く必然性がない。`,
+ vocab:[["always run in the same order","「常に同じ順序で実行される」。ワークフロー適性を示す決定的な条件"]]},
+
+{n:52, dom:"D1", skill:"Agent Architecture", multi:true,
+ stem:`A team is evaluating whether an agent is justified for a new task. Which conditions argue in favor of an agent rather than a fixed workflow? (Select TWO.)`,
+ opts:[`The steps required cannot be enumerated in advance and depend on what is discovered.`,
+       `Errors can be detected and recovered from, so occasional wrong turns are affordable.`,
+       `The task runs at very high volume, so per-task cost must be as low as possible.`,
+       `The output must be identical for identical inputs to satisfy a reporting contract.`],
+ ans:[0,1],
+ expl:`エージェントが正当化されるのは、手順が事前に決められず、かつ誤りを検出・回復できる場合。{{2}} の大量・低コスト要求と {{3}} の決定性要求は、いずれも固定ワークフロー側の論拠。`,
+ vocab:[["argue in favor of","「~を支持する根拠となる」。判断材料を選ばせる設問の言い回し"]]},
+
+{n:53, dom:"D1", skill:"Agent Architecture", multi:false,
+ stem:`In a coordinator and subagent design, a subagent returns a result that contradicts a constraint the user stated at the very beginning of the session. What is the most likely explanation?`,
+ opts:[`The coordinator did not pass the constraint along, since subagents do not inherit context.`,
+       `The subagent ignored the constraint because its model tier was lower than the coordinator's.`,
+       `The constraint was lost when the coordinator's own context window filled up during the run.`,
+       `The subagent processed the constraint but ranked its own tool output as more authoritative.`],
+ ans:[0],
+ expl:`サブエージェントはコンテキストを継承しない、が最頻出の知識。必要な制約・前提・出力形式はコーディネータが明示的に渡す必要がある。{{1}}・{{2}}・{{3}} はいずれも別の失敗モードで、この状況の第一候補ではない。`,
+ vocab:[["do not inherit context","「コンテキストを継承しない」。サブエージェント設計の最重要前提"]]},
+
+{n:54, dom:"D1", skill:"Agent Architecture", multi:false,
+ stem:`A research coordinator dispatches four subagents. The final report covers visual arts thoroughly but omits music and literature entirely, although the request said "creative industries." Where should investigation begin?`,
+ opts:[`The coordinator's decomposition log, to see which subtopics were actually assigned.`,
+       `The subagent traces, to see whether each one searched its assigned subtopic thoroughly.`,
+       `The synthesis step, to see whether sections were dropped while merging the results.`,
+       `The original user request, to see whether the wording was specific enough to act on.`],
+ ans:[0],
+ expl:`カバレッジ欠落は下流ではなく上流の分解が狭いことが原因である場合が多い。まずコーディネータの分解ログを見るのがトレース分析の順序。下流を先に疑うと原因に辿り着かない。`,
+ vocab:[["Where should investigation begin?","「調査はどこから始めるべきか」。原因切り分けの順序を問う設問"]]},
+
+{n:55, dom:"D1", skill:"Agent Architecture", multi:false,
+ stem:`A coordinator is given a step-by-step script telling it exactly which subagent to call in which order. Subagents frequently receive tasks that no longer fit what earlier steps discovered. Which change best addresses this?`,
+ opts:[`Give the coordinator the goal and quality bar, leaving room to adapt as it learns.`,
+       `Add more steps to the script so that every discovered situation has a matching instruction.`,
+       `Move the script into each subagent so they can decide when their own step applies.`,
+       `Increase the coordinator's model tier so it follows the existing script more precisely.`],
+ ans:[0],
+ expl:`コーディネータには手順の逐次指定ではなく目標と品質基準を与え、適応の余地を残すのが設計指針。{{1}} は分岐の網羅は不可能、{{2}} は全体最適の判断主体がいなくなる、{{3}} はむしろ硬直した手順に忠実になるだけ。`,
+ vocab:[["quality bar","「品質基準」。満たすべき水準を指す口語的表現"]]},
+
+/* ===== D1 · Agent Construction (5) ===== */
+{n:56, dom:"D1", skill:"Agent Construction", multi:false,
+ stem:`A custom agent loop ends the conversation when the assistant's text contains the phrase "task complete." Sessions sometimes stop while tool calls are still pending. Which correction is required?`,
+ opts:[`Terminate on stop_reason end_turn and continue the loop whenever it is tool_use.`,
+       `Require the phrase to appear on its own line so partial matches do not end the loop.`,
+       `Instruct the model in the system prompt to emit the phrase only when truly finished.`,
+       `Add a maximum iteration count so the loop always terminates within a bounded time.`],
+ ans:[0],
+ expl:`ループ制御は stop_reason に基づくのが唯一正しい。自然言語のパースは典型的なアンチパターン。{{1}}・{{2}} はパースを続ける限り確率的なまま、{{3}} は安全弁として有用でも終了判定の機構としては誤り。`,
+ vocab:[["Which correction is required?","「どの修正が必要か」。改善案でなく必須の修正を問う言い方"]]},
+
+{n:57, dom:"D1", skill:"Agent Construction", multi:false,
+ stem:`An assistant response contains three tool_use blocks in a single turn. How should the application return the results?`,
+ opts:[`Send all three tool_result blocks together in one user message, each with its own id.`,
+       `Send three separate user messages, one per tool result, in the order the tools appear.`,
+       `Send the first tool result and wait for the model to request the remaining two again.`,
+       `Send the three results concatenated into a single tool_result block for compactness.`],
+ ans:[0],
+ expl:`並列ツール呼び出しの結果は、1つの user メッセージにすべての tool_result をまとめて返す。分割送信や連結は対応関係が壊れる。`,
+ vocab:[["each with its own id","「それぞれ固有の id を伴って」。tool_use_id の一対一対応を指す"]]},
+
+{n:58, dom:"D1", skill:"Agent Construction", multi:true,
+ stem:`A team must decide between the Claude Agent SDK and a hand-written agent loop for a new internal agent. Which considerations favor the SDK? (Select TWO.)`,
+ opts:[`The team wants built-in tools and a maintained loop rather than writing that plumbing.`,
+       `The team wants to start quickly and accept the SDK's conventions for session handling.`,
+       `The team needs control over every detail of message construction and retry behavior.`,
+       `The team must run the agent without any dependency beyond the raw HTTP endpoint.`],
+ ans:[0,1],
+ expl:`SDK は組み込みツールとエージェントループ一式を提供し、立ち上がりが速い。逆に、メッセージ構築やリトライを細部まで制御したい、依存を持ちたくないという要求は自作ループ側の論拠。`,
+ vocab:[["that plumbing","「その配管(=定型的な下回り)」。定型実装をまとめて指す口語表現"]]},
+
+{n:59, dom:"D1", skill:"Agent Construction", multi:false,
+ stem:`A company must run an agent inside its own network because customer data may not leave the environment. Which deployment model fits the constraint?`,
+ opts:[`Self-hosted, where the agent runs in infrastructure the company operates and controls.`,
+       `Managed hosting, with a contractual commitment that data is deleted after processing.`,
+       `Managed hosting, with the agent configured to redact customer data before processing.`,
+       `Self-hosted for development and managed hosting for production traffic volumes.`],
+ ans:[0],
+ expl:`データが環境外に出せないという制約には、自前ホスティングが直接の答え。{{1}} は契約であって技術的な制約充足ではない、{{2}} は加工しても外部送信が発生する、{{3}} は本番で制約に違反する。`,
+ vocab:[["may not leave the environment","「環境外に出してはならない」。データ所在に関する制約の定型"]]},
+
+{n:60, dom:"D1", skill:"Agent Construction", multi:false,
+ stem:`An agent must never issue a refund above a fixed amount, and compliance requires this to hold in every case. The team currently states the limit in the system prompt. What should they add?`,
+ opts:[`A hook that inspects the pending call and blocks amounts above the limit.`,
+       `A stronger instruction in the system prompt, repeated at the start of every session.`,
+       `A few-shot example showing a request above the limit being politely declined.`,
+       `A post-run report that lists refunds above the limit for review the next morning.`],
+ ans:[0],
+ expl:`「すべての場合で成立する」ことが要件なので、確率的なプロンプト指示ではなく hook によるプログラム的強制が必要。{{2}} も確率的、{{3}} は事後検知で防止になっていない。`,
+ vocab:[["requires this to hold in every case","「すべての場合で成立することを要求する」。保証が必要=hook の合図"]]},
+/* ===== D1 · Agent Patterns and Frameworks (5) ===== */
+{n:61, dom:"D1", skill:"Agent Patterns", multi:false,
+ stem:`An agent works well for twenty turns, then starts repeating earlier tool calls and forgetting decisions made at the start of the session. Which pattern most directly addresses this?`,
+ opts:[`Write durable notes to a file the agent re-reads, so decisions survive context pressure.`,
+       `Raise the model tier so the agent tracks a longer history within the same session.`,
+       `Reduce the number of tools so the agent has fewer options to cycle through each turn.`,
+       `Restart the session whenever the agent repeats a call, and re-issue the original request.`],
+ ans:[0],
+ expl:`メモリ(ファイルベースの永続化)パターンの典型。長いセッションでは決定事項を外部に書き出し、必要なときに読み戻す。{{1}} はコンテキスト上限の問題を解決しない、{{2}} はループの原因に触れていない、{{3}} は毎回やり直しになる。`,
+ vocab:[["survive context pressure","「コンテキストの圧迫を生き延びる」。長時間セッションでの情報保持を語る表現"]]},
+
+{n:62, dom:"D1", skill:"Agent Patterns", multi:false,
+ stem:`An agent must explore a large codebase before proposing a change. The exploration produces long file listings that push the original requirements out of the working context. Which pattern fits best?`,
+ opts:[`Delegate exploration to a subagent and bring back only the findings that matter.`,
+       `Ask the agent to read fewer files and to rely on file names to infer their contents.`,
+       `Increase the number of tools so exploration finishes in fewer total tool calls.`,
+       `Summarize the requirements more tightly so they take up less of the working context.`],
+ ans:[0],
+ expl:`コンテキスト分離パターン。冗長な探索はサブエージェントに隔離し、要約だけをメインに戻す。{{1}} は探索の質を落とす、{{2}} はツール数を増やしても出力量は減らない、{{3}} は要件側を削る本末転倒。`,
+ vocab:[["push ~ out of the working context","「~を作業コンテキストから押し出す」。context bloat の症状描写"]]},
+
+{n:63, dom:"D1", skill:"Agent Patterns", multi:false,
+ stem:`A team wants to compare three refactoring strategies that all start from the same completed analysis, without repeating the analysis three times. Which session capability fits?`,
+ opts:[`Fork the session after the analysis so each branch explores one strategy independently.`,
+       `Resume the analysis session three times and revert changes between the attempts.`,
+       `Compact the analysis session and paste the summary into three fresh sessions.`,
+       `Run the analysis once and describe its findings in the prompt of three new sessions.`],
+ ans:[0],
+ expl:`共有の分析ベースラインから分岐して複数アプローチを並行検証するのが fork_session の用途。{{1}} は直列で状態も汚れる、{{2}}・{{3}} は分析結果を手で運び直すことになり忠実さが落ちる。`,
+ vocab:[["without repeating ~ three times","「~を3回繰り返すことなく」。重複作業の回避を求める制約節"]]},
+
+{n:64, dom:"D1", skill:"Agent Patterns", multi:false,
+ stem:`A team is choosing an agentic abstraction framework to express a multi-step workflow with branching and retries. Which statement describes what such frameworks provide?`,
+ opts:[`Frameworks such as LangGraph, Strands, or PydanticAI structure multi-step control flow.`,
+       `Such frameworks replace the Messages API with their own model serving endpoints.`,
+       `Such frameworks guarantee deterministic output by constraining the model's sampling.`,
+       `Such frameworks are required to make parallel tool calls from a single response.`],
+ ans:[0],
+ expl:`LangGraph・Strands・PydanticAI はマルチステップのワークフロー構築を抽象化するフレームワーク。モデル提供やサンプリング制御を置き換えるものではなく、並列ツール呼び出しに必須でもない。`,
+ vocab:[["structure multi-step control flow","「多段の制御フローを構造化する」。フレームワークの役割を述べる標準的な表現"]]},
+
+{n:65, dom:"D1", skill:"Agent Patterns", multi:false,
+ stem:`A coordinator needs three independent lookups completed before it can synthesize an answer. It currently issues them across three consecutive turns. Which change reduces wall-clock time without changing the result?`,
+ opts:[`Issue all three task calls in a single response so they run concurrently.`,
+       `Reorder the three turns so the slowest lookup is issued before the other two.`,
+       `Merge the three lookups into one task and let a single subagent perform them.`,
+       `Cache the results of the three lookups so later sessions do not repeat them.`],
+ ans:[0],
+ expl:`並列実行は「1つの応答で複数のタスク呼び出しを同時に発行する」ことで実現する。ターンをまたぐと直列のまま。{{1}} は合計時間が変わらない、{{2}} は逐次実行に戻る、{{3}} は初回に効かない。`,
+ vocab:[["wall-clock time","「実時間・経過時間」。計算量ではなく体感所要時間を指す"]]},
+
+/* ===== D6 · Prompt Engineering (4) ===== */
+{n:66, dom:"D6", skill:"Prompt Engineering", multi:false,
+ stem:`A code review assistant is told to "be conservative and only report high-confidence issues." It still reports formatting nitpicks alongside real defects. Which revision is most likely to help?`,
+ opts:[`Name the categories to report and the categories to skip, instead of a confidence adjective.`,
+       `Instruct the assistant to assign a numeric confidence score and report only high scores.`,
+       `Add the word "only" in several places so the restriction is harder for the model to miss.`,
+       `Ask the assistant to review each file twice and report issues found in both passes.`],
+ ans:[0],
+ expl:`「保守的に」「高確信のみ」といった定性指示は精度を上げない。報告するカテゴリとスキップするカテゴリを明示するのが正解。{{1}} の自己申告スコアは較正されておらず基準にならない、{{2}} は文言の重ね塗り、{{3}} は同じ基準を2回適用するだけ。`,
+ vocab:[["confidence adjective","「確信度を表す形容詞」。measurable な基準と対比される曖昧語"]]},
+
+{n:67, dom:"D6", skill:"Prompt Engineering", multi:false,
+ stem:`A prompt mixes the assistant's role, the output schema, the current user question, and a pasted data table into one long user message. Which reorganization follows standard practice?`,
+ opts:[`Put the role and output schema in the system prompt, keeping the question and data in the user turn.`,
+       `Put the role, schema, question, and data all in the system prompt for consistent handling.`,
+       `Put the role and question in the system prompt, keeping the schema and data in the user turn.`,
+       `Keep everything in the user turn but separate the four parts with labeled section headers.`],
+ ans:[0],
+ expl:`system = 役割・不変ルール・出力形式、user = 個別タスクとデータ、という分担が標準。{{1}} は可変データを system に混ぜてキャッシュも壊す、{{2}} は質問という可変要素を system に置いている、{{3}} は分担の問題を体裁で誤魔化している。`,
+ vocab:[["follows standard practice","「標準的なやり方に沿う」。ベストプラクティス適合を問う定型"]]},
+
+{n:68, dom:"D6", skill:"Prompt Engineering", multi:true,
+ stem:`An extraction prompt is being iterated on. The team has 30 real failures collected from production. Which practices make the iteration effective? (Select TWO.)`,
+ opts:[`Turn the failures into a fixed test set and re-run it after every prompt change.`,
+       `Add a small number of the ambiguous failures as examples showing the intended handling.`,
+       `Rewrite the prompt from scratch each round so previous wording does not bias the result.`,
+       `Increase the prompt's length each round so more edge cases are described in prose.`],
+ ans:[0,1],
+ expl:`失敗例を固定のテストセットにして回帰を検出しつつ、曖昧ケースを few-shot として与えるのが反復改善の基本形。{{2}} は改善の積み上げを毎回捨てる、{{3}} は長さを増やすだけで散文の説明は形式・曖昧性の解決に弱い。`,
+ vocab:[["iterated on","「反復的に改善される」。iterate on ~ で「~を作り込む」"]]},
+
+{n:69, dom:"D6", skill:"Prompt Engineering", multi:false,
+ stem:`A public-facing assistant accepts free-text user questions that are inserted into a prompt template. Which measure best reduces the risk that user text is interpreted as instructions?`,
+ opts:[`Place the user text inside explicit delimiters labeled as data to process.`,
+       `Strip punctuation from the user text before inserting it into the prompt template.`,
+       `Limit the user text to 500 characters so injected instructions have less room.`,
+       `Insert the user text before the template instructions so the instructions come last.`],
+ ans:[0],
+ expl:`入力サニタイズと境界設計の基本。ユーザー文字列は明示的な区切りで囲み、データとして扱うことを宣言する。{{1}} は無害な入力まで壊す、{{2}} は短い注入文には無力、{{3}} は位置を変えても指示として読まれうる。`,
+ vocab:[["interpreted as instructions","「指示として解釈される」。プロンプトインジェクションの定義そのもの"]]},
+
+/* ===== D6 · Context Engineering (4) ===== */
+{n:70, dom:"D6", skill:"Context Engineering", multi:false,
+ stem:`In a long support conversation that is periodically summarized, the assistant begins referring to an order total as "about 300 dollars" when the actual figure is 287.40. Which change prevents this class of error?`,
+ opts:[`Keep exact case facts in a dedicated block carried forward outside the summary.`,
+       `Instruct the summarizer to preserve numeric precision when it condenses the history.`,
+       `Summarize less often so that fewer condensation steps can blur the original figures.`,
+       `Keep the entire conversation history so no summarization step is ever performed.`],
+ ans:[0],
+ expl:`逐次要約は数値・日付・金額を曖昧化させる。取引ファクトは要約の対象外として別ブロックで毎回保持するのが構造的な解。{{1}} は指示頼みで確率的、{{2}} は発生を遅らせるだけ、{{3}} はコンテキスト上限で早晩破綻する。`,
+ vocab:[["carried forward","「持ち越される」。要約をまたいで保持することを指す"]]},
+
+{n:71, dom:"D6", skill:"Context Engineering", multi:false,
+ stem:`An agent's context is filling with raw API responses from a tool that returns full customer records. The agent only ever uses the order status and the ship date. What is the best fix?`,
+ opts:[`Have the tool return only the status and ship date, so nothing else enters the context.`,
+       `Keep the full record but ask the agent to ignore the fields it does not need.`,
+       `Keep the full record and rely on periodic compaction to remove it once it is stale.`,
+       `Keep the full record but store it in a file the agent can read back when needed.`],
+ ans:[0],
+ expl:`コンテキストに入る前に刈り込むのが最も効く。{{1}} はトークンを消費したまま、{{2}} は膨張後の後始末、{{3}} はファイル化の手間に見合う情報量ではない。`,
+ vocab:[["so nothing else enters the context","「それ以外は一切コンテキストに入らない」。入口で絞る設計の説明"]]},
+
+{n:72, dom:"D6", skill:"Context Engineering", multi:false,
+ stem:`A long-running session has degraded: the assistant contradicts conclusions it reached earlier and re-derives the same analysis. The team wants to continue the work rather than restart. Which action fits best?`,
+ opts:[`Compact the session and write the settled conclusions into a scratchpad file to reference.`,
+       `Continue in the same session and repeat the conclusions at the top of every message.`,
+       `Start a new session and paste the entire prior transcript into the first message.`,
+       `Continue in the same session with a stronger instruction not to contradict itself.`],
+ ans:[0],
+ expl:`コンテキスト劣化への標準対応は、圧縮(compaction)と、確定事項の外部ファイルへの書き出しの併用。{{1}} は毎ターン膨張する、{{2}} は劣化した内容をそのまま持ち込む、{{3}} は指示で状態の問題を解こうとしている。`,
+ vocab:[["re-derives the same analysis","「同じ分析をやり直す」。文脈喪失の典型的な症状"]]},
+
+{n:73, dom:"D6", skill:"Context Engineering", multi:true,
+ stem:`A team wants to keep a multi-step research agent from drifting off the original question across many tool calls. Which techniques address context drift directly? (Select TWO.)`,
+ opts:[`Prune tool outputs down to the fields that the next step actually needs.`,
+       `Isolate broad exploration in subagents that return only condensed findings.`,
+       `Raise the number of results each search tool returns so fewer calls are needed.`,
+       `Give the agent more tools so it needs fewer steps to finish.`],
+ ans:[0,1],
+ expl:`context drift / bloat の対策は「ツール出力の刈り込み」「compaction」「サブエージェントによる分離」。{{2}} は取り込む情報を増やす方向で逆効果、{{3}} はツールが増えると選択精度が落ちるうえ蓄積量も減らない。`,
+ vocab:[["drifting off the original question","「元の問いから逸れていく」。context drift の平易な言い換え"]]},
+
+/* ===== D6 · Output Handling (3) ===== */
+{n:74, dom:"D6", skill:"Output Handling", multi:false,
+ stem:`An invoice extractor returns valid JSON that conforms to the schema, yet the line items sometimes do not add up to the stated total. Which conclusion is correct?`,
+ opts:[`Schema conformance guarantees structure, not semantics, so a validation step is still required.`,
+       `Schema conformance failed silently, so the schema needs stricter numeric type definitions.`,
+       `The parser accepted malformed JSON, so defensive parsing should be added before validation.`,
+       `The model needs a larger context window so it can see every line item at once.`],
+ ans:[0],
+ expl:`tool_use + JSON スキーマは構文エラーを排除するが、意味の誤りは防げない。合計不一致のような整合性は別途検証が必要。{{1}}・{{2}} は前提が誤り、{{3}} は原因の特定になっていない。`,
+ vocab:[["structure, not semantics","「構造であって意味ではない」。スキーマ検証の限界を一言で表す"]]},
+
+{n:75, dom:"D6", skill:"Output Handling", multi:false,
+ stem:`An application must always receive a structured object and must never receive a free-text answer. Which configuration provides that guarantee?`,
+ opts:[`Set tool_choice so the model is required to call one of the defined tools.`,
+       `Set tool_choice to auto and add an instruction that a tool must always be used.`,
+       `Define a single tool so there is nothing else for the model to choose between.`,
+       `Parse the text response and fall back to a second request when parsing fails.`],
+ ans:[0],
+ expl:`tool_choice を any(またはツール指定)にすると必ずツール呼び出しになり、構造化出力が保証される。auto はテキストで返る可能性が残り、ツールが1つでも auto なら同様。{{3}} は保証ではなく事後の救済策。`,
+ vocab:[["provides that guarantee","「その保証を与える」。best-effort との違いを問う言い方"]]},
+
+{n:76, dom:"D6", skill:"Output Handling", multi:false,
+ stem:`A validator rejects an extraction because a required field is empty. The same document is retried five times with the same prompt, and every attempt fails the same way. What should the pipeline do?`,
+ opts:[`Stop retrying and route the document for human handling, since the value may be absent.`,
+       `Retry with a higher temperature so the model explores a different reading each time.`,
+       `Retry with the failed output attached so the model can correct its previous attempt.`,
+       `Relax the validator so the empty field is accepted and downstream systems handle it.`],
+ ans:[0],
+ expl:`リトライが効くのは形式・構造のエラー。元文書に情報が存在しない場合は何度やっても埋まらないので、人手に回す判断が正しい。{{2}} は形式エラーには有効だが本件では同じ結果、{{1}} は当てずっぽうを促す、{{3}} は誤った値を下流に流す。`,
+ vocab:[["every attempt fails the same way","「毎回同じ形で失敗する」。再現性のある失敗=リトライ無効の合図"]]},
+
+/* ===== D8 · Tool Implementation (4) ===== */
+{n:77, dom:"D8", skill:"Tool Implementation", multi:false,
+ stem:`Two tools named search_records and find_entries each have a one-line description, and the model picks the wrong one about a third of the time. What should the team do first?`,
+ opts:[`Expand both descriptions to state inputs, examples, and when to prefer one over the other.`,
+       `Add few-shot examples to the system prompt showing which tool fits which request.`,
+       `Merge the two tools into one and add a parameter that selects the search behavior.`,
+       `Add a routing step that picks the tool in code before the model sees the request.`],
+ ans:[0],
+ expl:`ツール説明はツール選択の主要メカニズムなので、まず description を拡充するのが最初の一手。{{1}}・{{2}}・{{3}} はいずれも効きうるが、最も安価で直接的な手当てを飛ばしている。`,
+ vocab:[["What should the team do first?","「まず何をすべきか」。有効な策の中から順序を問う設問"]]},
+
+{n:78, dom:"D8", skill:"Tool Implementation", multi:false,
+ stem:`A tool that queries an inventory service returns the string "Operation failed" for every problem, including timeouts, unknown SKUs, and permission denials. Which improvement helps the agent recover appropriately?`,
+ opts:[`Return a structured error with a category, whether it is retryable, and a readable message.`,
+       `Return the raw exception text from the inventory service so no information is lost.`,
+       `Return an empty result set so the agent proceeds without treating it as a failure.`,
+       `Return the same message but retry three times inside the tool before reporting it.`],
+ ans:[0],
+ expl:`回復戦略を選ばせるには、種別・リトライ可否・人間可読な説明を持つ構造化エラーが必要。{{1}} は非構造で解釈が不安定、{{2}} は失敗を成功に偽装する最悪の選択、{{3}} は permission や validation エラーには無意味。`,
+ vocab:[["recover appropriately","「適切に回復する」。エラー種別に応じた対応を選べることを指す"]]},
+
+{n:79, dom:"D8", skill:"Tool Implementation", multi:true,
+ stem:`A subagent whose only job is to summarize documents currently has access to all eighteen tools defined in the application. Which problems does this create? (Select TWO.)`,
+ opts:[`Tool selection accuracy drops because many similar options compete for the same request.`,
+       `The subagent can take actions outside its role, widening the blast radius of a mistake.`,
+       `Each unused tool definition must be executed once before the subagent can ignore it.`,
+       `Tool definitions cannot be cached when more than ten tools are defined in a request.`],
+ ans:[0,1],
+ expl:`ツールが多すぎると選択精度が落ち、さらに役割外の操作が可能になって最小権限に反する。サブエージェントには役割に必要なツールだけをスコープする。{{2}}・{{3}} は事実ではない。`,
+ vocab:[["widening the blast radius","「影響範囲を広げる」。権限過多のリスクを表す運用表現"]]},
+
+{n:80, dom:"D8", skill:"Tool Implementation", multi:false,
+ stem:`A search tool returns the same empty response both when the query legitimately matches nothing and when the backend times out. The agent reports "no results found" in both cases. Which change is required?`,
+ opts:[`Distinguish an empty result from a failed lookup and mark the failure as an error.`,
+       `Retry the search once inside the tool so timeouts are less likely to reach the agent.`,
+       `Return a message telling the agent that results may be incomplete in some cases.`,
+       `Have the agent re-run any search that returns zero results to confirm the outcome.`],
+ ans:[0],
+ expl:`アクセス失敗と「0件という正常結果」を区別して返すのがツール設計の要件。{{1}} は発生確率を下げるだけ、{{2}} は毎回の警告で判断材料にならない、{{3}} は正常な0件でも無駄な再実行が走る。`,
+ vocab:[["legitimately matches nothing","「正当に一致がゼロである」。正常な空結果を指す言い方"]]},
+/* ===== D8 · Agentic Customization (4) ===== */
+{n:81, dom:"D8", skill:"Agentic Customization", multi:false,
+ stem:`A company has a written procedure for filing incident reports: which sections to include, the tone, and the approval order. No new system call is involved. Which mechanism fits this best?`,
+ opts:[`A Skill, so the procedure is loaded on demand when an incident report is being written.`,
+       `A custom tool, so the procedure is executed as a function whenever a report is filed.`,
+       `An MCP server, so the procedure is available to every application in the company.`,
+       `A built-in tool, so the procedure is applied without any additional configuration.`],
+ ans:[0],
+ expl:`外部システムの呼び出しがなく、必要なのは手順書・ドメイン知識なので Skills が適合する。ツールや MCP は「コードで何かを実行する」ための手段で、この要件には過剰かつ的外れ。`,
+ vocab:[["No new system call is involved","「新しいシステム呼び出しは伴わない」。ツール化が不要であることを示す決定的な条件"]]},
+
+{n:82, dom:"D8", skill:"Agentic Customization", multi:false,
+ stem:`Three separate Claude applications each need to read and update the same internal HR records service, and the integration must be maintained by one owning team. Which approach fits?`,
+ opts:[`Build an MCP server exposing the HR operations so all three applications connect to it.`,
+       `Build the same custom tool in each application and keep the three copies aligned.`,
+       `Have one application own the integration and let the other two call that application.`,
+       `Describe the HR service's REST endpoints in each application's system prompt.`],
+ ans:[0],
+ expl:`複数アプリで再利用し、独立して保守したい統合は MCP サーバー化が定石。{{1}} はコピーの同期コスト、{{2}} は責務のねじれと単一障害点、{{3}} はプロンプトへのハードコードで最も脆い。`,
+ vocab:[["maintained by one owning team","「1つの担当チームが保守する」。独立保守性の要求を示す"]]},
+
+{n:83, dom:"D8", skill:"Agentic Customization", multi:false,
+ stem:`A developer needs the assistant to read files, run a build command, and grep the repository during a session. Which approach is appropriate?`,
+ opts:[`Use the built-in tools for these operations rather than defining custom equivalents.`,
+       `Define custom tools for reading, building, and searching to control their behavior.`,
+       `Build an MCP server that wraps the file system and the build command for reuse.`,
+       `Author a Skill that documents the file paths and the exact build command to run.`],
+ ans:[0],
+ expl:`ファイル・シェル・検索といった汎用操作はビルトインツールの守備範囲。{{1}}・{{2}} は既に存在する機能の再実装で、{{3}} は知識の提供であって操作を実行する手段ではない。`,
+ vocab:[["custom equivalents","「同等の自作版」。既存機能を作り直すことを指す"]]},
+
+{n:84, dom:"D8", skill:"Agentic Customization", multi:false,
+ stem:`A team needs a standard integration with a widely used issue tracker, and separately needs a tool for their own internal deployment pipeline. Which allocation of effort is most sensible?`,
+ opts:[`Adopt an existing community server for the tracker and build a custom one for the pipeline.`,
+       `Build custom servers for both so the team controls the behavior of each integration.`,
+       `Adopt community servers for both and file feature requests for the pipeline gaps.`,
+       `Build a custom server for the tracker and use built-in tools for the deployment pipeline.`],
+ ans:[0],
+ expl:`標準的な統合は既存のコミュニティ MCP サーバーを優先し、自作はチーム固有のワークフローに限る、が指針。{{1}} は車輪の再発明、{{2}} は社内固有の要件が満たせない、{{3}} は逆の割り当て。`,
+ vocab:[["allocation of effort","「工数の配分」。どこに手をかけるかを問う言い方"]]},
+
+/* ===== D8 · MCP Server Development (2) ===== */
+{n:85, dom:"D8", skill:"MCP Development", multi:false,
+ stem:`An MCP server exposes a get_issue tool. Agents repeatedly call it with guessed identifiers to discover what issues exist, wasting many calls. Which addition to the server fixes the pattern?`,
+ opts:[`Expose the issue list as a resource so clients can browse what exists before calling tools.`,
+       `Expose a second tool that returns every issue at once so guessing is no longer needed.`,
+       `Expose a prompt that instructs agents to ask the user for the identifier first.`,
+       `Return a richer error from get_issue that lists a few nearby valid identifiers.`],
+ ans:[0],
+ expl:`MCP のリソースは参照用のコンテンツカタログを公開する仕組みで、探索的なツール呼び出しを減らすためにある。アクションはツール、参照データはリソース、という役割分担が問われている。`,
+ vocab:[["browse what exists","「何があるかを一覧して見る」。カタログ的な参照を表す"]]},
+
+{n:86, dom:"D8", skill:"MCP Development", multi:false,
+ stem:`An MCP server runs as a local process on the same machine as the client and exchanges messages over the process's input and output streams. Which transport is in use?`,
+ opts:[`Standard input and output, which is the usual transport for a local server process.`,
+       `A websocket connection, which is the usual transport for a local server process.`,
+       `HTTP over the loopback interface, which is required for any local server process.`,
+       `A shared memory segment, which is negotiated when client and server share a host.`],
+ ans:[0],
+ expl:`ローカル同一マシンのサーバーは stdio 経由が標準。リモートは HTTP やソケットを使う。共有メモリは MCP の通信パターンにない。`,
+ vocab:[["over the process's input and output streams","「プロセスの入出力ストリーム経由で」。stdio の説明そのもの"]]},
+
+/* ===== D7 · AI Application Security (3) ===== */
+{n:87, dom:"D7", skill:"AI App Security", multi:false,
+ stem:`A summarizer processes web pages submitted by end users. One page contains hidden text telling the assistant to email the contents of its configuration to an external address. Which mitigation is most effective?`,
+ opts:[`Treat page content as untrusted and prevent it from triggering sensitive actions.`,
+       `Add a system prompt line asking the assistant to disregard instructions found in pages.`,
+       `Raise the model tier so the assistant follows the original instructions more closely.`,
+       `Increase temperature so the assistant's behavior is harder for an attacker to predict.`],
+ ans:[0],
+ expl:`untrusted なコンテンツの分離と最小権限のガードレールが唯一実効性のある対策。{{1}} は強制力のないお願い、{{2}} は指示追従が良くなるほど注入にも従いやすくなりうる、{{3}} は無関係。`,
+ vocab:[["most effective mitigation","「最も有効な緩和策」。効果の大小を比較させる定型"]]},
+
+{n:88, dom:"D7", skill:"AI App Security", multi:true,
+ stem:`An assistant that answers questions over internal documents occasionally includes employee home addresses in its replies. The documents legitimately contain those fields. Which controls address this? (Select TWO.)`,
+ opts:[`Redact the sensitive fields before the documents enter the model's context.`,
+       `Scan generated responses for sensitive patterns and block them before delivery.`,
+       `Instruct the assistant in the system prompt never to reveal personal information.`,
+       `Log every response containing personal data so incidents can be reviewed later.`],
+ ans:[0,1],
+ expl:`入口(取り込み前のマスキング)と出口(応答の検査)を重ねるのが guardrail の多層化。{{2}} はプロンプト指示で確率的、{{3}} は事後の検知であって漏えいそのものを止めていない。`,
+ vocab:[["before they enter the model's context","「モデルのコンテキストに入る前に」。入口対策を指す定型"]]},
+
+{n:89, dom:"D7", skill:"AI App Security", multi:false,
+ stem:`A multi-tenant assistant retrieves documents for whichever customer is asking. A bug report shows one tenant receiving another tenant's document in an answer. Where does the primary control belong?`,
+ opts:[`In the retrieval layer, which must filter by tenant before any document reaches the model.`,
+       `In the system prompt, which should state that documents from other tenants are off limits.`,
+       `In the response filter, which should remove content that mentions another tenant's name.`,
+       `In the tool description, which should explain that documents are tenant-specific.`],
+ ans:[0],
+ expl:`認可はモデルに委ねず、データ取得層で強制するのが原則。テナント境界は検索の時点でフィルタされていなければならない。{{1}}・{{3}} は確率的な指示、{{2}} は名前が出ない漏えいを取り逃す。`,
+ vocab:[["off limits","「立ち入り禁止・対象外」。制約を口語的に表す"]]},
+
+/* ===== D7 · Guardrails and Safe Deployment (2) ===== */
+{n:90, dom:"D7", skill:"Guardrails", multi:false,
+ stem:`A team relies on a single output filter as its only safety control. A reviewer argues this is insufficient. Which principle supports the reviewer's position?`,
+ opts:[`Guardrails should be layered across input, prompt design, output, and enforced actions.`,
+       `Output filters are unreliable and should be replaced by prompt instructions instead.`,
+       `Safety controls should be applied only at the point where data leaves the system.`,
+       `A single control is acceptable if it is tested against a large adversarial test set.`],
+ ans:[0],
+ expl:`ガードレールは単層に頼らず多層化するのが原則。入力フィルタ、プロンプト設計、出力検証、hook による強制を重ねる。{{1}} は置き換えでなく併用が正、{{2}} は入口対策を捨てている、{{3}} は単層の前提を維持している。`,
+ vocab:[["supports the reviewer's position","「レビュアーの立場を裏付ける」。主張の根拠を選ばせる言い方"]]},
+
+{n:91, dom:"D7", skill:"Guardrails", multi:false,
+ stem:`An agent that manages cloud resources is granted an administrator role because scoping its permissions "would take too long to work out." Which secure-by-design principle does this violate?`,
+ opts:[`Least privilege, which requires granting only the access the agent's tasks actually need.`,
+       `Defense in depth, which requires more than one control to stand between risk and impact.`,
+       `Separation of duties, which requires different actors to request and to approve changes.`,
+       `Fail-safe defaults, which require a system to deny access when configuration is missing.`],
+ ans:[0],
+ expl:`必要以上の権限を与えている点が最小権限(least privilege)違反。他の原則も重要だが、この状況が直接侵しているのは権限の広さ。`,
+ vocab:[["would take too long to work out","「洗い出すのに時間がかかりすぎる」。手抜きの言い訳として提示される定型"]]},
+
+/* ===== D7 · Identity, Secrets, and Key Management (2) ===== */
+{n:92, dom:"D7", skill:"Secrets & Keys", multi:false,
+ stem:`A repository scan finds a production API key committed six months ago in a test fixture. The key has since been used by the running service. What is the correct response?`,
+ opts:[`Rotate the key immediately, then remove it from the code and load it from managed configuration.`,
+       `Remove the key from the current files and rewrite the repository history to erase it.`,
+       `Restrict the key to a narrower set of permissions and leave the existing value in place.`,
+       `Move the key into an encrypted file in the repository so it is no longer plain text.`],
+ ans:[0],
+ expl:`一度でも公開領域に入った鍵は失効したものとして扱い、まずローテーションする。履歴の書き換えだけでは既に流出した値は無効化されず、権限の縮小や暗号化保存も漏えいした値の有効性を消さない。`,
+ vocab:[["rotate the key","「鍵をローテーションする」。古い値を失効させ新しい値に差し替えること"]]},
+
+{n:93, dom:"D7", skill:"Secrets & Keys", multi:false,
+ stem:`Developers currently share one API key across local development, staging, and production. Which practice should the team adopt?`,
+ opts:[`Issue separate keys per environment so usage can be attributed and revoked independently.`,
+       `Keep one key but log every call with the environment name so usage can be attributed.`,
+       `Keep one key and rotate it monthly so the window of exposure stays reasonably short.`,
+       `Issue separate keys per developer but share one key across the deployed environments.`],
+ ans:[0],
+ expl:`環境ごとに鍵を分離するのが原則で、これにより利用の帰属付けと個別失効が可能になる。{{1}} は記録だけで失効できない、{{2}} はローテーションしても影響範囲は全環境、{{3}} は本番と staging を混ぜたままで最も危険な部分が残る。`,
+ vocab:[["attributed and revoked independently","「個別に帰属付け・失効できる」。鍵分離の利点を述べる表現"]]},
+
+/* ===== D7 · Claude Hooks (1) ===== */
+{n:94, dom:"D7", skill:"Hooks", multi:false,
+ stem:`During an automated cleanup task, an agent proposed a recursive delete on a directory outside the working tree. It was caught by a reviewer, but the team wants a control that does not depend on review. What should they add?`,
+ opts:[`A hook that inspects destructive commands and blocks paths outside the working tree.`,
+       `A system prompt rule forbidding recursive deletes anywhere outside the working tree.`,
+       `A Skill that documents which directories the cleanup task is allowed to touch.`,
+       `A post-run audit that reports any deletions performed outside the working tree.`],
+ ans:[0],
+ expl:`破壊的アクションの防止は hook でプログラム的にブロックする。プロンプトや手順書は確率的で保証にならず、事後監査は削除後にしか気付けない。`,
+ vocab:[["does not depend on review","「レビューに依存しない」。人手の確認を前提にしない統制を求める条件"]]},
+
+/* ===== D3 · Claude Code Operation (3) ===== */
+{n:95, dom:"D3", skill:"Claude Code", multi:false,
+ stem:`A convention applies to every test file in a repository, and those files are scattered across many directories. Which configuration mechanism fits with the least duplication?`,
+ opts:[`A rules file with a path glob that matches test files anywhere.`,
+       `A CLAUDE.md placed in each directory that currently contains test files.`,
+       `A single root CLAUDE.md section describing the convention for all test files.`,
+       `A slash command that developers run before they start editing any test file.`],
+ ans:[0],
+ expl:`ディレクトリ横断の条件付き規約は、.claude/rules/ の paths glob が適合する。{{1}} は重複と保守漏れ、{{2}} は常時読み込みで無関係な作業にも載る、{{3}} は手動実行に依存する。`,
+ vocab:[["with the least duplication","「重複が最も少ない形で」。保守性を評価軸に指定する制約節"]]},
+
+{n:96, dom:"D3", skill:"Claude Code", multi:false,
+ stem:`A CI job invokes Claude Code to review changed files, but the job hangs until the runner times out and no output is produced. Which correction resolves it?`,
+ opts:[`Run in non-interactive mode so the session executes the prompt and exits without waiting.`,
+       `Increase the CI runner timeout so the interactive session has time to finish its work.`,
+       `Pipe the prompt through standard input so the interactive session receives its instructions.`,
+       `Reduce the number of changed files so the review completes before the timeout is reached.`],
+ ans:[0],
+ expl:`CI でのハングは対話モードのまま起動していることが原因で、非対話実行(-p / --print)が解。{{1}}・{{3}} は時間の問題にすり替えている、{{2}} は対話セッションのままで確実に解決しない。`,
+ vocab:[["hangs until the runner times out","「ランナーがタイムアウトするまで固まる」。入力待ちの症状を示す"]]},
+
+{n:97, dom:"D3", skill:"Claude Code", multi:false,
+ stem:`A new team member reports that a set of instructions their colleague relies on has no effect on their machine, even though both work in the same repository. What is the most likely cause?`,
+ opts:[`The instructions live in the colleague's user-level configuration, which is not in the repository.`,
+       `The instructions are in the root CLAUDE.md but the new member has not run the import command.`,
+       `The instructions are in the root CLAUDE.md but only apply after the repository is re-initialized.`,
+       `The instructions are in a subdirectory CLAUDE.md that both members are working under.`],
+ ans:[0],
+ expl:`「同僚には効くが新メンバーには効かない」はユーザーレベル設定に書かれている典型例。ユーザースコープはバージョン管理外で共有されない。{{1}}・{{2}} は存在しない手順、{{3}} なら両者に等しく効くはず。`,
+ vocab:[["has no effect on their machine","「その人の環境では効かない」。環境差分による設定未適用を示す"]]},
+
+/* ===== D4 · Debugging and Error Handling (3) ===== */
+{n:98, dom:"D4", skill:"Debugging", multi:false,
+ stem:`A production feature fails intermittently. Some failures show a connection reset before any response arrives; others show a complete response whose content is wrong. What should the team establish first?`,
+ opts:[`Whether each failure originates in the integration layer or in the model's output.`,
+       `Whether the failures cluster around a particular time of day or traffic volume.`,
+       `Whether a different model version reduces the overall failure rate in staging.`,
+       `Whether adding retries to every failed request lowers the user-visible error rate.`],
+ ans:[0],
+ expl:`まず統合レイヤの問題(接続・認証・タイムアウト・パース)とモデル出力の問題(誤判断・ハルシネーション)を切り分けるのが原因調査の出発点。切り分け前の対策は的外れになりやすい。`,
+ vocab:[["originates in","「~に起因する」。障害の発生源を特定する動詞"]]},
+
+{n:99, dom:"D4", skill:"Debugging", multi:true,
+ stem:`A trace shows an agent selecting a reporting tool, receiving a permission error, retrying the identical call four times, and finally returning an empty report. Which two defects does the trace reveal? (Select TWO.)`,
+ opts:[`A permission error was retried, although retrying cannot change the outcome.`,
+       `A failure was reported to the user as an empty result, not an error.`,
+       `The reporting tool was selected even though the request did not require a report.`,
+       `The agent stopped after four attempts instead of continuing until it succeeded.`],
+ ans:[0,1],
+ expl:`回復戦略の誤りが2つある。permission エラーはリトライで解決せずエスカレーションが必要で、失敗を空の結果として返すのは失敗の隠蔽。{{2}} はトレースからは読み取れず、{{3}} は継続しても状況は変わらない。`,
+ vocab:[["reveal","「(欠陥を)明らかにする」。トレースから読み取れる事実を問う言い方"]]},
+
+{n:100, dom:"D4", skill:"Debugging", multi:false,
+ stem:`An assistant generates code and then reviews its own output in the same session, reporting no issues. An independent reviewer later finds two logic errors. What does this indicate about the review setup?`,
+ opts:[`A reviewer sharing the generation context is unlikely to question its own earlier decisions.`,
+       `Self-review requires a stricter prompt, which would have surfaced both of the logic errors.`,
+       `The generation step used too few tokens, so the code was written without enough care.`,
+       `Logic errors cannot be detected by review and require execution against a test suite.`],
+ ans:[0],
+ expl:`生成と同じセッションでの自己レビューは自分の判断を疑いにくい、が知識ポイント。独立したレビューインスタンスの方が微妙な問題を検出しやすい。{{1}} はプロンプトで構造的な限界は消せず、{{2}} は無関係、{{3}} は言い過ぎ。`,
+ vocab:[["sharing the generation context","「生成時のコンテキストを共有している」。自己レビューの限界を説明する句"]]}
+];
+
+/* ---------- routing ---------- */
+const VIEWS = [
+  { hash: "#guide",    tab: "tab-guide",    view: "view-guide" },
+  { hash: "#practice", tab: "tab-practice", view: "view-practice" },
+  { hash: "#scenario", tab: "tab-scenario", view: "view-scenario" }
+];
+
+function route() {
+  const h = location.hash;
+  let active = VIEWS.find(v => v.hash === h) || VIEWS[0];
+  for (const v of VIEWS) {
+    const on = v === active;
+    document.getElementById(v.view).hidden = !on;
+    document.getElementById(v.tab).classList.toggle("active", on);
+  }
+  if (active !== VIEWS[0]) window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+/* タブ列が2段に折り返した場合でも sticky ツールバーが潜り込まないよう実測値を反映する */
+function syncTabsHeight() {
+  const h = document.querySelector(".tabs").getBoundingClientRect().height;
+  document.documentElement.style.setProperty("--tabs-h", Math.round(h) + "px");
+}
+window.addEventListener("resize", syncTabsHeight);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncTabsHeight, () => {});
+syncTabsHeight();
+
+/* ---------- quiz engine (one instance per question bank) ---------- */
+const LETTERS = ["A", "B", "C", "D", "E"];
+
+function shuffledIdx(n) {
+  const a = Array.from({ length: n }, (_, i) => i);
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function makeQuiz(cfg) {
+  const QS = cfg.questions;
+  const idp = cfg.prefix;
+  const el = id => document.getElementById(id + "-" + idp);
+  const root = el("quiz-root");
+  const chipsEl = el("chips");
+  const scoreLine = el("score-line");
+  const resultPanel = el("result-panel");
+  const resultBars = el("result-bars");
+  const btnReset = el("btn-reset");
+  const btnResult = el("btn-result");
+  const btnShuffle = el("btn-shuffle");
+  const btnOptShuffle = el("btn-optshuffle");
+
+  let state = [];
+  let order = [];
+  let filter = "ALL";
+
+  function initState() {
+    state = QS.map(q => ({
+      order: shuffledIdx(q.opts.length),
+      answered: false,
+      correct: false,
+      sel: new Set()
+    }));
+    order = QS.map((_, i) => i);
+  }
+
+  function domains() {
+    const seen = [];
+    for (const q of QS) if (!seen.includes(q.dom)) seen.push(q.dom);
+    seen.sort();
+    return seen;
+  }
+
+  function renderChips() {
+    chipsEl.innerHTML = "";
+    const mk = (key, label) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip" + (filter === key ? " active" : "");
+      b.textContent = label;
+      b.addEventListener("click", () => { filter = key; renderChips(); renderQuiz(); });
+      chipsEl.appendChild(b);
+    };
+    mk("ALL", `全問 (${QS.length})`);
+    for (const d of domains()) {
+      mk(d, `${d} (${QS.filter(q => q.dom === d).length})`);
+    }
+  }
+
+  function grade(qi) {
+    const q = QS[qi], st = state[qi];
+    const want = new Set(q.ans);
+    st.correct = st.sel.size === want.size && [...st.sel].every(x => want.has(x));
+    st.answered = true;
+    updateScore();
+    renderCard(qi);
+  }
+
+  function updateScore() {
+    const answered = state.filter(s => s.answered).length;
+    const correct = state.filter(s => s.correct).length;
+    scoreLine.innerHTML = `解答済み ${answered} / ${QS.length} ・ <span class="ok">正解 ${correct}</span>`;
+    if (!resultPanel.hidden) renderResult();
+  }
+
+  function renderResult() {
+    resultBars.innerHTML = "";
+    const rows = [["全体", state.filter(s => s.correct).length, state.filter(s => s.answered).length]];
+    for (const d of domains()) {
+      let a = 0, c = 0;
+      QS.forEach((q, i) => {
+        if (q.dom !== d) return;
+        if (state[i].answered) { a++; if (state[i].correct) c++; }
+      });
+      rows.push([d, c, a]);
+    }
+    for (const [name, c, a] of rows) {
+      const pct = a ? Math.round(c / a * 100) : 0;
+      const cls = pct >= 80 ? "" : (pct >= 60 ? " mid" : " low");
+      const row = document.createElement("div");
+      row.className = "rbar";
+      row.innerHTML = `<span>${name}</span><span class="tr"><span class="fl${a ? cls : ""}" style="width:${pct}%"></span></span><span class="num">${c} / ${a}(${a ? pct + "%" : "未解答"})</span>`;
+      resultBars.appendChild(row);
+    }
+  }
+
+  function renderCard(qi) {
+    const card = document.getElementById(`qc-${idp}-${qi}`);
+    if (!card) return;
+    const fresh = buildCard(qi);
+    card.replaceWith(fresh);
+    if (state[qi].answered) {
+      const expl = fresh.querySelector(".expl");
+      if (expl) expl.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  function buildCard(qi) {
+    const q = QS[qi], st = state[qi];
+    const card = document.createElement("article");
+    card.className = "qcard";
+    card.id = `qc-${idp}-${qi}`;
+
+    const head = document.createElement("div");
+    head.className = "qhead";
+    head.innerHTML = `<span class="qno">Q${q.n}</span><span class="dom">${q.dom}</span>` +
+      (q.skill ? `<span class="dom">${q.skill}</span>` : "") +
+      (q.multi ? `<span class="multi-note">${q.ans.length}つ選択</span>` : "") +
+      (st.answered ? `<span class="status ${st.correct ? "ok" : "ng"}">${st.correct ? "✔ 正解" : "✘ 不正解"}</span>` : "");
+    card.appendChild(head);
+
+    const stem = document.createElement("p");
+    stem.className = "stem";
+    stem.innerHTML = q.stem;
+    card.appendChild(stem);
+
+    const list = document.createElement("ul");
+    list.className = "opts";
+    st.order.forEach((orig, pos) => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.innerHTML = `<span class="letter">${LETTERS[pos]}.</span><span>${q.opts[orig]}</span>`;
+      if (st.answered) {
+        btn.disabled = true;
+        if (q.ans.includes(orig)) btn.classList.add("correct");
+        else if (st.sel.has(orig)) btn.classList.add("wrong");
+      } else if (q.multi) {
+        if (st.sel.has(orig)) btn.classList.add("selected");
+        btn.addEventListener("click", () => {
+          if (st.sel.has(orig)) st.sel.delete(orig);
+          else if (st.sel.size < q.ans.length) st.sel.add(orig);
+          renderCard(qi);
+        });
+      } else {
+        btn.addEventListener("click", () => { st.sel = new Set([orig]); grade(qi); });
+      }
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+    card.appendChild(list);
+
+    if (q.multi && !st.answered) {
+      const row = document.createElement("div");
+      row.className = "submitrow";
+      const submit = document.createElement("button");
+      submit.type = "button";
+      submit.className = "btn primary";
+      submit.textContent = `解答する(${st.sel.size} / ${q.ans.length} 選択中)`;
+      submit.disabled = st.sel.size !== q.ans.length;
+      submit.addEventListener("click", () => grade(qi));
+      row.appendChild(submit);
+      card.appendChild(row);
+    }
+
+    if (st.answered) {
+      const letters = q.ans.map(a => LETTERS[st.order.indexOf(a)]).sort().join(", ");
+      // 解説内の {{n}} は「出題時点の n 番目の選択肢」を指す。表示順に合わせて記号を振り直す。
+      const relabel = t => t.replace(/\{\{(\d+)\}\}/g, (_, d) => {
+        const pos = st.order.indexOf(Number(d));
+        return pos >= 0 ? LETTERS[pos] : "?";
+      });
+      const expl = document.createElement("div");
+      expl.className = "expl";
+      let html = `<p><span class="a${st.correct ? "" : " ng"}">正解: ${letters}</span> — ${relabel(q.expl)}</p>`;
+      if (q.vocab && q.vocab.length) {
+        html += `<p class="vlabel">英語の用法</p><ul class="vocab">`;
+        for (const [term, note] of q.vocab) html += `<li><code>${term}</code> — ${note}</li>`;
+        html += `</ul>`;
+      }
+      expl.innerHTML = html;
+      card.appendChild(expl);
+    }
+
+    return card;
+  }
+
+  function renderQuiz() {
+    root.innerHTML = "";
+    for (const i of order) {
+      if (filter !== "ALL" && QS[i].dom !== filter) continue;
+      root.appendChild(buildCard(i));
+    }
+  }
+
+  btnReset.addEventListener("click", () => {
+    initState();
+    updateScore();
+    renderChips();
+    renderQuiz();
+    if (!resultPanel.hidden) renderResult();
+    window.scrollTo(0, 0);
+  });
+
+  btnResult.addEventListener("click", () => {
+    resultPanel.hidden = !resultPanel.hidden;
+    if (!resultPanel.hidden) renderResult();
+    btnResult.textContent = resultPanel.hidden ? "分野別の結果を見る" : "分野別の結果を隠す";
+  });
+
+  if (btnOptShuffle) {
+    btnOptShuffle.addEventListener("click", () => {
+      // 未解答の問題だけ並べ替える。解答済みの問題は表示中の並びと解説を保持する。
+      QS.forEach((q, i) => {
+        if (!state[i].answered) state[i].order = shuffledIdx(q.opts.length);
+      });
+      renderQuiz();
+      window.scrollTo(0, 0);
+    });
+  }
+
+  if (btnShuffle) {
+    btnShuffle.addEventListener("click", () => {
+      const perm = shuffledIdx(QS.length);
+      order = perm;
+      renderQuiz();
+      window.scrollTo(0, 0);
+    });
+  }
+
+  initState();
+  renderChips();
+  renderQuiz();
+  updateScore();
+}
+
+makeQuiz({ questions: PRACTICE_Q, prefix: "p" });
+makeQuiz({ questions: SCENARIOS, prefix: "s" });
+route();
+</script>
+</body></html>
